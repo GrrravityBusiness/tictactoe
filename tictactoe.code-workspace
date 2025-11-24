@@ -1,0 +1,38 @@
+    {
+    "settings": {
+        "dart.flutterSdkPath": "/Users/pj/.asdf/installs/flutter/3.38.3-stable",
+        "files.exclude": {
+            "**/.classpath": true,
+            "**/.project": true,
+            "**/.settings": true,
+            "**/.factorypath": true,
+            "**/*.config.dart": true,
+            "**/*.freezed.dart": true,
+            "**/*.g.dart": true,
+            "**/*.mocks.dart": true,
+            "**/*.gr.dart": true
+        },
+    },
+    "folders": [
+        {
+            "name" : "App",
+            "path": "."
+        },
+    ],
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "[DEV] App",
+                "request": "launch",
+                "type": "dart",
+                "flutterMode": "debug",
+                "program": "${workspaceFolder:App}/lib/main.dart",
+                "toolArgs": [
+                    "--dart-define-from-file=${workspaceFolder:App}/.env.dev.json"
+                ]
+            },
+        ],
+        "compounds": []
+    }
+}

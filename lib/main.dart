@@ -1,0 +1,29 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tictactoe/core/router/app_navigator.dart';
+import 'package:tictactoe/core/services/theme/presentation/cubit/theme_cubit.dart';
+import 'package:tictactoe/core/services/theme/presentation/cubit/theme_state.dart';
+
+void main() {
+  runApp(const MainApp());
+}
+
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => ThemeController(),
+      child: BlocBuilder<ThemeController, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp.router(
+            theme: state.themeData.baseTheme,
+            routerConfig: AppNavigator().routerBuilder(context),
+            debugShowCheckedModeBanner: false,
+          );
+        },
+      ),
+    );
+  }
+}
