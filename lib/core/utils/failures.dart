@@ -49,6 +49,9 @@ abstract class Failure with _$Failure implements Exception {
     try {
       final result = await call();
       return right(result);
+    } on FormatException catch (e, s) {
+      Logger.e(e, stackTrace: s);
+      return left(const Failure.badRequest());
     } on Failure catch (e) {
       return left(e);
     } on Exception catch (e, s) {
