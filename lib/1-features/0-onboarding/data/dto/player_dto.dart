@@ -15,10 +15,15 @@ abstract class PlayerDTO with _$PlayerDTO {
       _$PlayerDTOFromJson(json);
 }
 
+/// PlayerDTO extension to manipulate DTO through utility methods.
 extension OnPlayerDTO on PlayerDTO {
+  /// DTO to Entity mapper
   Player get toEntity => Player(name: name);
 }
 
+/// Player extension to manipulate entity into datasource objects through
+/// utility methods.
 extension OnPlayer on Player {
+  /// Entity to DTO mapper
   PlayerDTO get toDTO => PlayerDTO(name: name);
 }

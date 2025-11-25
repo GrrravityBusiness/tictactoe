@@ -9,7 +9,7 @@ import 'package:tictactoe/core/services/theme/presentation/cubit/theme_state.dar
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initDependencies();
+  await DependencyManager.initDependencies();
   runApp(const MainApp());
 }
 

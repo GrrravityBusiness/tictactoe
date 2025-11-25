@@ -13,16 +13,22 @@ class PlayerRepositoryImpl implements PlayerRepository {
   final LocalPlayerDatasource _localPlayerDatasource;
 
   @override
+  /// Deletes the player data from local storage, returns a [Failure]
+  /// on error or a [bool] indicating success.
   Future<Either<Failure, bool>> deletePlayer() async =>
       _localPlayerDatasource.deletePlayer();
 
   @override
-  Player? loadPlayer() {
-    final playerDTO = _localPlayerDatasource.loadPlayer();
-    return playerDTO?.toEntity;
+  /// Loads the player data from local storage, returns a [Failure]
+  /// on error or a [Player?] indicating the loaded player or null if not found.
+  Either<Failure, Player?> loadPlayer() {
+    final playerOrFailure = _localPlayerDatasource.loadPlayer();
+    return playerOrFailure.bind((dto) => Right(dto?.toEntity));
   }
 
   @override
+  /// Saves the player data to local storage, returns a [Failure] on error or
+  /// a [bool] indicating success.
   Future<Either<Failure, bool>> savePlayer({required Player player}) async {
     return _localPlayerDatasource.savePlayer(playerDTO: player.toDTO);
   }

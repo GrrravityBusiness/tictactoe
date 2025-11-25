@@ -9,6 +9,7 @@ abstract class PlayerState with _$PlayerState {
     required Player? player,
   }) = _PlayerState;
 
+  /// Utility factory to create the initial state with no player.
   factory PlayerState.initial() => const PlayerState(player: null);
 
   const PlayerState._();

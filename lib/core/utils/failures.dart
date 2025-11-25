@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tictactoe/core/utils/logger.dart';
 
@@ -49,6 +50,35 @@ abstract class Failure with _$Failure implements Exception {
     try {
       final result = await call();
       return right(result);
+    } on PlatformException catch (e, s) {
+      Logger.e(e, stackTrace: s);
+      if (e.code == 'InvalidOperation') {
+        return left(const Failure.badRequest());
+      }
+      return left(const Failure.other());
+    } on FormatException catch (e, s) {
+      Logger.e(e, stackTrace: s);
+      return left(const Failure.badRequest());
+    } on Failure catch (e) {
+      return left(e);
+    } on Exception catch (e, s) {
+      Logger.e(e, stackTrace: s);
+      return left(const Failure.other());
+    }
+  }
+
+  static Either<Failure, DataT> guardSync<DataT>(
+    DataT Function() call,
+  ) {
+    try {
+      final result = call();
+      return right(result);
+    } on PlatformException catch (e, s) {
+      Logger.e(e, stackTrace: s);
+      if (e.code == 'InvalidOperation') {
+        return left(const Failure.badRequest());
+      }
+      return left(const Failure.other());
     } on FormatException catch (e, s) {
       Logger.e(e, stackTrace: s);
       return left(const Failure.badRequest());

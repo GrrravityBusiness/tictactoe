@@ -8,11 +8,13 @@ class PlayerUseCase {
 
   final PlayerRepository _playerRepository;
 
-  Future<bool> savePlayer({required String name}) async {
-    final player = await _playerRepository.savePlayer(
-      player: Player(name: name),
+  /// Saves the current name into local storage, returns true on success.
+  /// failures are shadowed and false is returned instead.
+  Future<bool> savePlayer({required Player player}) async {
+    final savedOrFailure = await _playerRepository.savePlayer(
+      player: player,
     );
-    return player.fold(
+    return savedOrFailure.fold(
       // Note: out of simplicity, we return false on failure but we could
       // handle it differently if needed
       (failure) => false,
@@ -21,7 +23,14 @@ class PlayerUseCase {
   }
 
   Player? loadPlayer() {
-    return _playerRepository.loadPlayer();
+    final playerOrFailure = _playerRepository.loadPlayer();
+
+    return playerOrFailure.fold(
+      // Note: out of simplicity, we return null on failure but we could
+      // handle it differently if needed
+      (failure) => null,
+      (player) => player,
+    );
   }
 
   Future<bool> deletePlayer() async {

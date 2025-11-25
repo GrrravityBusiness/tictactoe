@@ -9,29 +9,73 @@ class PlayerForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PlayerController, PlayerState>(
-      builder: (context, state) {
-        return Row(
-          mainAxisAlignment: .center,
-          children: [
-            Container(
-              width: 220,
-              height: 70,
-              padding: EdgeInsets.all(context.dsTokens.spacing.medium),
-              child: TextFormField(
-                decoration: const InputDecoration(labelText: 'Player Name'),
-                initialValue: state.player?.name ?? '',
-                onFieldSubmitted: (value) =>
-                    context.read<PlayerController>().setPlayer(name: value),
-              ),
-            ),
-            IconButton(
-              onPressed: context.read<PlayerController>().deletePlayer,
-              icon: const Icon(Icons.delete),
-            ),
-          ],
-        );
+    return Row(
+      mainAxisAlignment: .center,
+      crossAxisAlignment: .end,
+      children: [
+        const PlayerTextField(),
+        IconButton(
+          onPressed: context.read<PlayerController>().deletePlayer,
+          icon: const Icon(Icons.delete),
+        ),
+      ],
+    );
+  }
+}
+
+class PlayerTextField extends StatefulWidget {
+  const PlayerTextField({super.key});
+
+  @override
+  State<PlayerTextField> createState() => _PlayerTextFieldState();
+}
+
+class _PlayerTextFieldState extends State<PlayerTextField> {
+  final TextEditingController _nameInputController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameInputController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    _nameInputController.text =
+        context.read<PlayerController>().state.player?.name ?? '';
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<PlayerController, PlayerState>(
+      listener: (context, state) {
+        if (state.player == null) {
+          _nameInputController.clear();
+        } else {
+          _nameInputController.text = state.player!.name;
+        }
       },
+      listenWhen: (prev, curr) {
+        if (prev.player != null && curr.player == null) {
+          return true;
+        }
+        if (_nameInputController.text == '' && curr.player != null) {
+          return true;
+        }
+        return false;
+      },
+      child: Container(
+        width: 220,
+        height: 70,
+        padding: EdgeInsets.all(context.dsTokens.spacing.medium),
+        child: TextFormField(
+          decoration: const InputDecoration(labelText: 'Player Name'),
+          controller: _nameInputController,
+          onFieldSubmitted: (value) =>
+              context.read<PlayerController>().setPlayer(name: value),
+        ),
+      ),
     );
   }
 }

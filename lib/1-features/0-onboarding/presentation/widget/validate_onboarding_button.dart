@@ -15,7 +15,7 @@ class ValidateOnboardingButton extends StatelessWidget {
     return BlocBuilder<PlayerController, PlayerState>(
       builder: (context, state) {
         return TextButton(
-          onPressed: state.player != null
+          onPressed: state.player != null && state.player!.name.isNotEmpty
               ? () async {
                   await context.read<PlayerController>().savePlayer();
                   if (context.mounted) {
