@@ -7,6 +7,7 @@ import 'package:tictactoe/core/router/app_navigator.dart';
 import 'package:tictactoe/core/services/dependency_injection/dependency_injection.dart';
 import 'package:tictactoe/core/services/theme/presentation/cubit/theme_cubit.dart';
 import 'package:tictactoe/core/services/theme/presentation/cubit/theme_state.dart';
+import 'package:tictactoe/core/utils/constants.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +36,7 @@ class MainApp extends StatelessWidget {
           return MaterialApp.router(
             theme: state.themeData.baseTheme,
             routerConfig: AppNavigator().routerBuilder(context),
+            scaffoldMessengerKey: Constants.snackbarKey,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             debugShowCheckedModeBanner: false,

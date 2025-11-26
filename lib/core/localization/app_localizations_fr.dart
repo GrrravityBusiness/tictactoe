@@ -25,4 +25,8 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get theme_action_toggle => 'Changer de thème';
+
+  @override
+  String get onboarding_prevent_close_title =>
+      'You have to set yourself a name before leaving!';
 }

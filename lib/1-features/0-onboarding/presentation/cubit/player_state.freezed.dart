@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PlayerState {
 
- Player? get player;
+ Player? get player; bool get saved;
 /// Create a copy of PlayerState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $PlayerStateCopyWith<PlayerState> get copyWith => _$PlayerStateCopyWithImpl<Play
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlayerState&&(identical(other.player, player) || other.player == player));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlayerState&&(identical(other.player, player) || other.player == player)&&(identical(other.saved, saved) || other.saved == saved));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,player);
+int get hashCode => Object.hash(runtimeType,player,saved);
 
 @override
 String toString() {
-  return 'PlayerState(player: $player)';
+  return 'PlayerState(player: $player, saved: $saved)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $PlayerStateCopyWith<$Res>  {
   factory $PlayerStateCopyWith(PlayerState value, $Res Function(PlayerState) _then) = _$PlayerStateCopyWithImpl;
 @useResult
 $Res call({
- Player? player
+ Player? player, bool saved
 });
 
 
@@ -62,10 +62,11 @@ class _$PlayerStateCopyWithImpl<$Res>
 
 /// Create a copy of PlayerState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? player = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? player = freezed,Object? saved = null,}) {
   return _then(_self.copyWith(
 player: freezed == player ? _self.player : player // ignore: cast_nullable_to_non_nullable
-as Player?,
+as Player?,saved: null == saved ? _self.saved : saved // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 /// Create a copy of PlayerState
@@ -162,10 +163,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Player? player)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Player? player,  bool saved)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PlayerState() when $default != null:
-return $default(_that.player);case _:
+return $default(_that.player,_that.saved);case _:
   return orElse();
 
 }
@@ -183,10 +184,10 @@ return $default(_that.player);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Player? player)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Player? player,  bool saved)  $default,) {final _that = this;
 switch (_that) {
 case _PlayerState():
-return $default(_that.player);case _:
+return $default(_that.player,_that.saved);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -203,10 +204,10 @@ return $default(_that.player);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Player? player)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Player? player,  bool saved)?  $default,) {final _that = this;
 switch (_that) {
 case _PlayerState() when $default != null:
-return $default(_that.player);case _:
+return $default(_that.player,_that.saved);case _:
   return null;
 
 }
@@ -218,10 +219,11 @@ return $default(_that.player);case _:
 
 
 class _PlayerState extends PlayerState {
-  const _PlayerState({required this.player}): super._();
+  const _PlayerState({required this.player, required this.saved}): super._();
   
 
 @override final  Player? player;
+@override final  bool saved;
 
 /// Create a copy of PlayerState
 /// with the given fields replaced by the non-null parameter values.
@@ -233,16 +235,16 @@ _$PlayerStateCopyWith<_PlayerState> get copyWith => __$PlayerStateCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PlayerState&&(identical(other.player, player) || other.player == player));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PlayerState&&(identical(other.player, player) || other.player == player)&&(identical(other.saved, saved) || other.saved == saved));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,player);
+int get hashCode => Object.hash(runtimeType,player,saved);
 
 @override
 String toString() {
-  return 'PlayerState(player: $player)';
+  return 'PlayerState(player: $player, saved: $saved)';
 }
 
 
@@ -253,7 +255,7 @@ abstract mixin class _$PlayerStateCopyWith<$Res> implements $PlayerStateCopyWith
   factory _$PlayerStateCopyWith(_PlayerState value, $Res Function(_PlayerState) _then) = __$PlayerStateCopyWithImpl;
 @override @useResult
 $Res call({
- Player? player
+ Player? player, bool saved
 });
 
 
@@ -270,10 +272,11 @@ class __$PlayerStateCopyWithImpl<$Res>
 
 /// Create a copy of PlayerState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? player = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? player = freezed,Object? saved = null,}) {
   return _then(_PlayerState(
 player: freezed == player ? _self.player : player // ignore: cast_nullable_to_non_nullable
-as Player?,
+as Player?,saved: null == saved ? _self.saved : saved // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

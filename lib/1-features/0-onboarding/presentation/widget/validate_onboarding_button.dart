@@ -18,7 +18,7 @@ class ValidateOnboardingButton extends StatelessWidget {
       builder: (context, state) {
         final l10n = AppLocalizations.of(context);
         return SimpleTextButton.primary(
-          onPressed: state.player != null && state.player!.name.isNotEmpty
+          onPressed: state.isPlayerValid
               ? () async {
                   await context.read<PlayerController>().savePlayer();
                   if (context.mounted) {

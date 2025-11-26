@@ -133,6 +133,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Changer de thème'**
   String get theme_action_toggle;
+
+  /// No description provided for @onboarding_prevent_close_title.
+  ///
+  /// In fr, this message translates to:
+  /// **'You have to set yourself a name before leaving!'**
+  String get onboarding_prevent_close_title;
 }
 
 class _AppLocalizationsDelegate

@@ -4,5 +4,6 @@
   "onboarding_action_validate_name": "C'est bien moi !",
   "onboarding_welcome_title": "Bienvenue sur TicTacToe",
   "onboarding_field_playername_label": "Nom de joueur",
-  "theme_action_toggle": "Changer de thème"
+  "theme_action_toggle": "Changer de thème",
+  "onboarding_prevent_close_title": "You have to set yourself a name before leaving!"
 }

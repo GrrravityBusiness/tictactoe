@@ -11,19 +11,22 @@ class LobbyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(top: 50),
-        child: Center(
-          child: Column(
-            children: [
-              const Text('Hello World!'), //TODO : remove placeholder
-              const ThemeSwitcherWidget(),
-              SimpleTextButton.secondary(
-                onPressed: () => context.go(AppRoutes.onboarding),
-                text: l10n.nav_go_to_onboarding,
-              ),
-            ],
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.only(top: 50),
+          child: Center(
+            child: Column(
+              children: [
+                const Text('Hello World!'), //TODO : remove placeholder
+                const ThemeSwitcherWidget(),
+                SimpleTextButton.secondary(
+                  onPressed: () => context.push(AppRoutes.onboarding),
+                  text: l10n.nav_go_to_onboarding,
+                ),
+              ],
+            ),
           ),
         ),
       ),

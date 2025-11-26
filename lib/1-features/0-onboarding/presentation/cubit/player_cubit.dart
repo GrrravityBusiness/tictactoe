@@ -17,12 +17,15 @@ class PlayerController extends Cubit<PlayerState> {
 
   /// Save the current player into local storage, returns true on success.
   /// It will not save if the player is null or the name is empty.
-  /// this will not emit any state change.
+  /// this will emit a new state to mark it as saved
   Future<bool> savePlayer() async {
     if (state.player == null || state.player!.name.isEmpty) {
       return false;
     }
     final result = await _playerUseCase.savePlayer(player: state.player!);
+    if (result) {
+      emit(state.copyWith(saved: result));
+    }
     return result;
   }
 
@@ -38,7 +41,7 @@ class PlayerController extends Cubit<PlayerState> {
     final player = _playerUseCase.loadPlayer();
     // Note : player could be null but at this point, there isn't any cases
     // where this is problematic as loadPlayer is called only once at init
-    emit(state.copyWith(player: player));
+    emit(state.copyWith(player: player, saved: player != null));
   }
 
   /// Delete the player from local storage, emits initial state on success.
