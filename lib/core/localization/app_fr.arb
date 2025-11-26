@@ -5,5 +5,16 @@
   "onboarding_welcome_title": "Bienvenue sur TicTacToe",
   "onboarding_field_playername_label": "Nom de joueur",
   "theme_action_toggle": "Changer de thème",
-  "onboarding_prevent_close_title": "You have to set yourself a name before leaving!"
+  "onboarding_prevent_close_title": "Choisis un nom avant de partir !",
+  "lobby_welcome_message": "Bonjour {playerName}, prêt à jouer ?",
+  "@lobby_welcome_message": {
+    "placeholders": {
+      "playerName": {
+        "type": "String"
+      }
+    }
+  },
+  "lobby_field_opponent_label": "Nom",
+  "lobby_select_opponent_title": "Nomme ton adversaire : ",
+  "lobby_page_error_message": "Une erreur s'est produite"
 }

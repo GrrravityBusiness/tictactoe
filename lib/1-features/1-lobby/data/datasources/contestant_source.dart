@@ -12,7 +12,7 @@ class ContestantSource {
 
   final SharedPreferences _sharedPreferences;
 
-  static const String mainContestantKey = 'player';
+  static const String mainContestantKey = 'main_contestant';
   static const String opponentKey = 'opponent';
 
   /// Retrieving main contestant from local storage
@@ -33,6 +33,30 @@ class ContestantSource {
       return ContestantDTO.fromJson(
         jsonDecode(contestantOrNull) as Json,
       );
+    });
+  }
+
+  /// Save main contestant to local storage
+  /// Returns a [bool] wrapped in an [Either] to indicate success or failure
+  ///
+  /// Will overwrite any existing opponent
+  Future<Either<Failure, bool>> saveMainContestant(
+    ContestantDTO contestant,
+  ) async {
+    return Failure.guard(() async {
+      final jsonString = jsonEncode(contestant.toJson());
+      return _sharedPreferences.setString(
+        mainContestantKey,
+        jsonString,
+      );
+    });
+  }
+
+  /// Clears the main contestant from local storage
+  /// Returns a [bool] wrapped in an [Either] to indicate success or failure
+  Future<Either<Failure, bool>> clearMainContestant() async {
+    return Failure.guard(() async {
+      return _sharedPreferences.remove(mainContestantKey);
     });
   }
 
@@ -67,7 +91,7 @@ class ContestantSource {
     return Failure.guard(() async {
       final jsonString = jsonEncode(contestant.toJson());
       return _sharedPreferences.setString(
-        mainContestantKey,
+        opponentKey,
         jsonString,
       );
     });

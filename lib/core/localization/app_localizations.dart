@@ -137,8 +137,32 @@ abstract class AppLocalizations {
   /// No description provided for @onboarding_prevent_close_title.
   ///
   /// In fr, this message translates to:
-  /// **'You have to set yourself a name before leaving!'**
+  /// **'Choisis un nom avant de partir !'**
   String get onboarding_prevent_close_title;
+
+  /// No description provided for @lobby_welcome_message.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bonjour {playerName}, prêt à jouer ?'**
+  String lobby_welcome_message(String playerName);
+
+  /// No description provided for @lobby_field_opponent_label.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom'**
+  String get lobby_field_opponent_label;
+
+  /// No description provided for @lobby_select_opponent_title.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nomme ton adversaire : '**
+  String get lobby_select_opponent_title;
+
+  /// No description provided for @lobby_page_error_message.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une erreur s\'est produite'**
+  String get lobby_page_error_message;
 }
 
 class _AppLocalizationsDelegate

@@ -1,25 +1,54 @@
 import 'package:dartz/dartz.dart';
-import 'package:tictactoe/1-features/1-lobby/data/datasources/history_source.dart';
-import 'package:tictactoe/1-features/1-lobby/data/dto/history_dto.dart';
-import 'package:tictactoe/1-features/1-lobby/domain/entities/history.dart';
-import 'package:tictactoe/1-features/1-lobby/domain/repositories/history_repository.dart';
+import 'package:tictactoe/1-features/1-lobby/data/datasources/contestant_source.dart';
+import 'package:tictactoe/1-features/1-lobby/data/dto/contestant_dto.dart';
+import 'package:tictactoe/1-features/1-lobby/domain/entities/contestant.dart';
+import 'package:tictactoe/1-features/1-lobby/domain/repositories/contestant_repository.dart';
 import 'package:tictactoe/core/utils/failures.dart';
 
-class HistoryRepositoryImpl extends HistoryRepository {
-  HistoryRepositoryImpl({required HistorySource historySource})
-    : _historySource = historySource;
+class ContestantRepositoryImpl extends ContestantRepository {
+  ContestantRepositoryImpl({required ContestantSource contestantSource})
+    : _contestantSource = contestantSource;
 
-  final HistorySource _historySource;
-
-  @override
-  Future<Either<Failure, bool>> clearHistories() =>
-      _historySource.clearHistories();
+  final ContestantSource _contestantSource;
 
   @override
-  Future<Either<Failure, List<History>>> getHistories() async {
-    final historiesOrFailure = _historySource.getHistories();
-    return historiesOrFailure.map(
-      (historyDTOs) => historyDTOs.toEntity,
+  /// Gets the main contestant from the data source and
+  /// converts it to entity objects
+  Either<Failure, Contestant> getMainContestant() {
+    final contestantOrFailure = _contestantSource.getMainContestant();
+    return contestantOrFailure.map(
+      (contestant) => contestant.toEntity,
     );
   }
+
+  @override
+  /// Saves the main contestant contestant in datasource
+  Future<Either<Failure, bool>> saveMainContestant(Contestant contestant) =>
+      _contestantSource.saveMainContestant(contestant.toDTO);
+
+  @override
+  /// Clears the saved main contestant from the data source
+  Future<Either<Failure, bool>> clearMainContestant() =>
+      _contestantSource.clearMainContestant();
+
+  @override
+  /// Gets the opponent from the data source and
+  /// converts it to entity objects
+  Either<Failure, Contestant?> getOpponent() {
+    final contestantOrFailure = _contestantSource.getOpponent();
+
+    return contestantOrFailure.map(
+      (contestant) => contestant?.toEntity,
+    );
+  }
+
+  @override
+  /// Saves the opponent contestant in datasource
+  Future<Either<Failure, bool>> saveOpponent(Contestant contestant) =>
+      _contestantSource.saveOpponent(contestant.toDTO);
+
+  @override
+  /// Clears the saved opponent contestant from the data source
+  Future<Either<Failure, bool>> clearOpponent() =>
+      _contestantSource.clearOpponent();
 }

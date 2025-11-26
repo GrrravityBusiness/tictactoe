@@ -29,4 +29,18 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get onboarding_prevent_close_title =>
       'You have to set yourself a name before leaving!';
+
+  @override
+  String lobby_welcome_message(String playerName) {
+    return 'Hello $playerName, ready to play ?';
+  }
+
+  @override
+  String get lobby_field_opponent_label => 'Name';
+
+  @override
+  String get lobby_select_opponent_title => 'Name your opponent:';
+
+  @override
+  String get lobby_page_error_message => 'An error occurred';
 }

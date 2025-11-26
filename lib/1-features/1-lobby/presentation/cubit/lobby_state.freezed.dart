@@ -12,20 +12,20 @@ part of 'lobby_state.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$LobbyState {
+mixin _$LobbyData {
 
- MainContestant get player; Opponent get opponent; List<History> get history;
-/// Create a copy of LobbyState
+ MainContestant get player; Opponent? get opponent; List<History> get history;
+/// Create a copy of LobbyData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$LobbyStateCopyWith<LobbyState> get copyWith => _$LobbyStateCopyWithImpl<LobbyState>(this as LobbyState, _$identity);
+$LobbyDataCopyWith<LobbyData> get copyWith => _$LobbyDataCopyWithImpl<LobbyData>(this as LobbyData, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LobbyState&&const DeepCollectionEquality().equals(other.player, player)&&const DeepCollectionEquality().equals(other.opponent, opponent)&&const DeepCollectionEquality().equals(other.history, history));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LobbyData&&const DeepCollectionEquality().equals(other.player, player)&&const DeepCollectionEquality().equals(other.opponent, opponent)&&const DeepCollectionEquality().equals(other.history, history));
 }
 
 
@@ -34,18 +34,18 @@ int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(
 
 @override
 String toString() {
-  return 'LobbyState(player: $player, opponent: $opponent, history: $history)';
+  return 'LobbyData(player: $player, opponent: $opponent, history: $history)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $LobbyStateCopyWith<$Res>  {
-  factory $LobbyStateCopyWith(LobbyState value, $Res Function(LobbyState) _then) = _$LobbyStateCopyWithImpl;
+abstract mixin class $LobbyDataCopyWith<$Res>  {
+  factory $LobbyDataCopyWith(LobbyData value, $Res Function(LobbyData) _then) = _$LobbyDataCopyWithImpl;
 @useResult
 $Res call({
- MainContestant player, Opponent opponent, List<History> history
+ MainContestant player, Opponent? opponent, List<History> history
 });
 
 
@@ -53,20 +53,20 @@ $Res call({
 
 }
 /// @nodoc
-class _$LobbyStateCopyWithImpl<$Res>
-    implements $LobbyStateCopyWith<$Res> {
-  _$LobbyStateCopyWithImpl(this._self, this._then);
+class _$LobbyDataCopyWithImpl<$Res>
+    implements $LobbyDataCopyWith<$Res> {
+  _$LobbyDataCopyWithImpl(this._self, this._then);
 
-  final LobbyState _self;
-  final $Res Function(LobbyState) _then;
+  final LobbyData _self;
+  final $Res Function(LobbyData) _then;
 
-/// Create a copy of LobbyState
+/// Create a copy of LobbyData
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? player = freezed,Object? opponent = freezed,Object? history = null,}) {
   return _then(_self.copyWith(
 player: freezed == player ? _self.player : player // ignore: cast_nullable_to_non_nullable
 as MainContestant,opponent: freezed == opponent ? _self.opponent : opponent // ignore: cast_nullable_to_non_nullable
-as Opponent,history: null == history ? _self.history : history // ignore: cast_nullable_to_non_nullable
+as Opponent?,history: null == history ? _self.history : history // ignore: cast_nullable_to_non_nullable
 as List<History>,
   ));
 }
@@ -74,8 +74,8 @@ as List<History>,
 }
 
 
-/// Adds pattern-matching-related methods to [LobbyState].
-extension LobbyStatePatterns on LobbyState {
+/// Adds pattern-matching-related methods to [LobbyData].
+extension LobbyDataPatterns on LobbyData {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -88,10 +88,10 @@ extension LobbyStatePatterns on LobbyState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _LobbyState value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _LobbyData value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _LobbyState() when $default != null:
+case _LobbyData() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -110,10 +110,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _LobbyState value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _LobbyData value)  $default,){
 final _that = this;
 switch (_that) {
-case _LobbyState():
+case _LobbyData():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -131,10 +131,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _LobbyState value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _LobbyData value)?  $default,){
 final _that = this;
 switch (_that) {
-case _LobbyState() when $default != null:
+case _LobbyData() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -152,9 +152,9 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( MainContestant player,  Opponent opponent,  List<History> history)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( MainContestant player,  Opponent? opponent,  List<History> history)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _LobbyState() when $default != null:
+case _LobbyData() when $default != null:
 return $default(_that.player,_that.opponent,_that.history);case _:
   return orElse();
 
@@ -173,9 +173,9 @@ return $default(_that.player,_that.opponent,_that.history);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( MainContestant player,  Opponent opponent,  List<History> history)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( MainContestant player,  Opponent? opponent,  List<History> history)  $default,) {final _that = this;
 switch (_that) {
-case _LobbyState():
+case _LobbyData():
 return $default(_that.player,_that.opponent,_that.history);case _:
   throw StateError('Unexpected subclass');
 
@@ -193,9 +193,9 @@ return $default(_that.player,_that.opponent,_that.history);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( MainContestant player,  Opponent opponent,  List<History> history)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( MainContestant player,  Opponent? opponent,  List<History> history)?  $default,) {final _that = this;
 switch (_that) {
-case _LobbyState() when $default != null:
+case _LobbyData() when $default != null:
 return $default(_that.player,_that.opponent,_that.history);case _:
   return null;
 
@@ -207,31 +207,31 @@ return $default(_that.player,_that.opponent,_that.history);case _:
 /// @nodoc
 
 
-class _LobbyState extends LobbyState {
-  const _LobbyState({required this.player, required this.opponent, required final  List<History> history}): _history = history,super._();
+class _LobbyData extends LobbyData {
+  const _LobbyData({required this.player, this.opponent, final  List<History> history = const <History>[]}): _history = history,super._();
   
 
 @override final  MainContestant player;
-@override final  Opponent opponent;
+@override final  Opponent? opponent;
  final  List<History> _history;
-@override List<History> get history {
+@override@JsonKey() List<History> get history {
   if (_history is EqualUnmodifiableListView) return _history;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_history);
 }
 
 
-/// Create a copy of LobbyState
+/// Create a copy of LobbyData
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$LobbyStateCopyWith<_LobbyState> get copyWith => __$LobbyStateCopyWithImpl<_LobbyState>(this, _$identity);
+_$LobbyDataCopyWith<_LobbyData> get copyWith => __$LobbyDataCopyWithImpl<_LobbyData>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LobbyState&&const DeepCollectionEquality().equals(other.player, player)&&const DeepCollectionEquality().equals(other.opponent, opponent)&&const DeepCollectionEquality().equals(other._history, _history));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LobbyData&&const DeepCollectionEquality().equals(other.player, player)&&const DeepCollectionEquality().equals(other.opponent, opponent)&&const DeepCollectionEquality().equals(other._history, _history));
 }
 
 
@@ -240,18 +240,18 @@ int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(
 
 @override
 String toString() {
-  return 'LobbyState(player: $player, opponent: $opponent, history: $history)';
+  return 'LobbyData(player: $player, opponent: $opponent, history: $history)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$LobbyStateCopyWith<$Res> implements $LobbyStateCopyWith<$Res> {
-  factory _$LobbyStateCopyWith(_LobbyState value, $Res Function(_LobbyState) _then) = __$LobbyStateCopyWithImpl;
+abstract mixin class _$LobbyDataCopyWith<$Res> implements $LobbyDataCopyWith<$Res> {
+  factory _$LobbyDataCopyWith(_LobbyData value, $Res Function(_LobbyData) _then) = __$LobbyDataCopyWithImpl;
 @override @useResult
 $Res call({
- MainContestant player, Opponent opponent, List<History> history
+ MainContestant player, Opponent? opponent, List<History> history
 });
 
 
@@ -259,20 +259,20 @@ $Res call({
 
 }
 /// @nodoc
-class __$LobbyStateCopyWithImpl<$Res>
-    implements _$LobbyStateCopyWith<$Res> {
-  __$LobbyStateCopyWithImpl(this._self, this._then);
+class __$LobbyDataCopyWithImpl<$Res>
+    implements _$LobbyDataCopyWith<$Res> {
+  __$LobbyDataCopyWithImpl(this._self, this._then);
 
-  final _LobbyState _self;
-  final $Res Function(_LobbyState) _then;
+  final _LobbyData _self;
+  final $Res Function(_LobbyData) _then;
 
-/// Create a copy of LobbyState
+/// Create a copy of LobbyData
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? player = freezed,Object? opponent = freezed,Object? history = null,}) {
-  return _then(_LobbyState(
+  return _then(_LobbyData(
 player: freezed == player ? _self.player : player // ignore: cast_nullable_to_non_nullable
 as MainContestant,opponent: freezed == opponent ? _self.opponent : opponent // ignore: cast_nullable_to_non_nullable
-as Opponent,history: null == history ? _self._history : history // ignore: cast_nullable_to_non_nullable
+as Opponent?,history: null == history ? _self._history : history // ignore: cast_nullable_to_non_nullable
 as List<History>,
   ));
 }

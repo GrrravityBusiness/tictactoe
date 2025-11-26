@@ -5,11 +5,11 @@ import 'package:tictactoe/1-features/1-lobby/domain/entities/history.dart';
 part 'lobby_state.freezed.dart';
 
 @freezed
-abstract class LobbyState with _$LobbyState {
-  const factory LobbyState({
+abstract class LobbyData with _$LobbyData {
+  const factory LobbyData({
     required MainContestant player,
-    required Opponent opponent,
-    required List<History> history,
-  }) = _LobbyState;
-  const LobbyState._();
+    Opponent? opponent,
+    @Default(<History>[]) List<History> history,
+  }) = _LobbyData;
+  const LobbyData._();
 }

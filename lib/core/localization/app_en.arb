@@ -5,5 +5,16 @@
   "onboarding_welcome_title": "Welcome on TicTacToe",
   "onboarding_field_playername_label": "Player Name",
   "theme_action_toggle": "Toggle Theme",
-  "onboarding_prevent_close_title": "You have to set yourself a name before leaving!"
+  "onboarding_prevent_close_title": "You have to set yourself a name before leaving!",
+  "lobby_welcome_message": "Hello {playerName}, ready to play ?",
+  "@lobby_welcome_message": {
+    "placeholders": {
+      "playerName": {
+        "type": "String"
+      }
+    }
+  },
+  "lobby_field_opponent_label": "Name",
+  "lobby_select_opponent_title": "Name your opponent:",
+  "lobby_page_error_message": "An error occurred"
 }
