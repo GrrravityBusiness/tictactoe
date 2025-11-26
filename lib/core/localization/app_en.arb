@@ -1,0 +1,8 @@
+{
+  "nav_go_to_onboarding": "Go to Onboarding",
+  "onboarding_step_add_name": "Start by creating your player name",
+  "onboarding_action_validate_name": "That's my name !",
+  "onboarding_welcome_title": "Welcome on TicTacToe",
+  "onboarding_field_playername_label": "Player Name",
+  "theme_action_toggle": "Toggle Theme"
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tictactoe/core/localization/app_localizations.dart';
 
 class TitleHeader extends StatelessWidget {
   const TitleHeader({super.key});
@@ -6,10 +7,11 @@ class TitleHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
     return Column(
       children: [
         Text(
-          'Welcome on TicTacToe',
+          l10n.onboarding_welcome_title,
           style: Theme.of(context).textTheme.headlineLarge?.copyWith(
             fontWeight: FontWeight.bold,
             letterSpacing: 2,

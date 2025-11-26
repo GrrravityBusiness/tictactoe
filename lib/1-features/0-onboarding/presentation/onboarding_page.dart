@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tictactoe/1-features/0-onboarding/presentation/widget/player_form.dart';
 import 'package:tictactoe/1-features/0-onboarding/presentation/widget/title_header.dart';
 import 'package:tictactoe/1-features/0-onboarding/presentation/widget/validate_onboarding_button.dart';
+import 'package:tictactoe/core/localization/app_localizations.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -9,6 +10,7 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -29,19 +31,19 @@ class OnboardingPage extends StatelessWidget {
               end: Alignment.bottomRight,
             ),
           ),
-          child: const SafeArea(
+          child: SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
               child: Column(
                 children: [
-                  SizedBox(height: 16),
-                  TitleHeader(),
-                  SizedBox(height: 32),
-                  Text('Start by creating your player name'),
-                  SizedBox(height: 8),
-                  PlayerForm(),
-                  SizedBox(height: 24),
-                  ValidateOnboardingButton(),
+                  const SizedBox(height: 16),
+                  const TitleHeader(),
+                  const SizedBox(height: 32),
+                  Text(l10n.onboarding_step_add_name),
+                  const SizedBox(height: 8),
+                  const PlayerForm(),
+                  const SizedBox(height: 24),
+                  const ValidateOnboardingButton(),
                 ],
               ),
             ),

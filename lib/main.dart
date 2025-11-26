@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/1-features/0-onboarding/domain/usecases/player_usecase.dart';
 import 'package:tictactoe/1-features/0-onboarding/presentation/cubit/player_cubit.dart';
+import 'package:tictactoe/core/localization/app_localizations.dart';
 import 'package:tictactoe/core/router/app_navigator.dart';
 import 'package:tictactoe/core/services/dependency_injection/dependency_injection.dart';
 import 'package:tictactoe/core/services/theme/presentation/cubit/theme_cubit.dart';
@@ -34,6 +35,8 @@ class MainApp extends StatelessWidget {
           return MaterialApp.router(
             theme: state.themeData.baseTheme,
             routerConfig: AppNavigator().routerBuilder(context),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             debugShowCheckedModeBanner: false,
           );
         },

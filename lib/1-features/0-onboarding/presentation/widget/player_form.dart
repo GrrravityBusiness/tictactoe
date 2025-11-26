@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/1-features/0-onboarding/presentation/cubit/player_cubit.dart';
 import 'package:tictactoe/1-features/0-onboarding/presentation/cubit/player_state.dart';
+import 'package:tictactoe/core/localization/app_localizations.dart';
 import 'package:tictactoe/core/services/theme/domain/entities/theme_ext.dart';
 
 class PlayerForm extends StatelessWidget {
@@ -48,6 +49,7 @@ class _PlayerTextFieldState extends State<PlayerTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return BlocListener<PlayerController, PlayerState>(
       listener: (context, state) {
         if (state.player == null) {
@@ -70,7 +72,9 @@ class _PlayerTextFieldState extends State<PlayerTextField> {
         height: 70,
         padding: EdgeInsets.all(context.dsTokens.spacing.medium),
         child: TextFormField(
-          decoration: const InputDecoration(labelText: 'Player Name'),
+          decoration: InputDecoration(
+            labelText: l10n.onboarding_field_playername_label,
+          ),
           controller: _nameInputController,
           onFieldSubmitted: (value) =>
               context.read<PlayerController>().setPlayer(name: value),
