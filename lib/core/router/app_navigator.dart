@@ -9,6 +9,7 @@ import 'package:tictactoe/core/utils/logger.dart';
 
 class AppNavigator {
   final Logger _logger = Logger('AppNavigator');
+
   GoRouter routerBuilder(BuildContext context) {
     return GoRouter(
       debugLogDiagnostics: true,
@@ -16,20 +17,21 @@ class AppNavigator {
       routes: [
         GoRoute(
           path: AppRoutes.lobby,
-          builder: (context, state) {
-            return const LobbyPage();
-          },
+          pageBuilder: (context, state) => _customPageTransition(
+            key: state.pageKey,
+            child: const LobbyPage(),
+          ),
         ),
         GoRoute(
           path: AppRoutes.onboarding,
-          builder: (context, state) {
-            return const OnboardingPage();
-          },
+          pageBuilder: (context, state) => _customPageTransition(
+            key: state.pageKey,
+            child: const OnboardingPage(),
+          ),
         ),
       ],
       redirect: (context, state) {
         final location = state.uri.path;
-        // Adding a guard on onboarding route to ensure player name is set
         if (location != AppRoutes.onboarding) {
           final playerState = context.read<PlayerController>().state;
           if (playerState.player == null || playerState.player!.name.isEmpty) {
@@ -43,4 +45,61 @@ class AppNavigator {
       },
     );
   }
+}
+
+CustomTransitionPage<void> _customPageTransition({
+  required LocalKey key,
+  required Widget child,
+}) {
+  return CustomTransitionPage<void>(
+    key: key,
+    child: child,
+    transitionDuration: const Duration(milliseconds: 500),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return AnimatedBuilder(
+        animation: animation,
+        builder: (context, _) {
+          //Responsible for the stretchings from left/right/top/bottom
+          final scale = Tween<double>(begin: 0.1, end: 1)
+              .animate(
+                CurvedAnimation(parent: animation, curve: Curves.elasticOut),
+              )
+              .value;
+          //responsible for the rotation effect
+          final rotate = Tween<double>(begin: -0.3, end: 0)
+              .animate(
+                CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
+              )
+              .value;
+
+          //responsible for the shadow effect on the bottom part of the screen
+          final shadowOpacity = Tween<double>(begin: 0.2, end: 0)
+              .animate(CurvedAnimation(parent: animation, curve: Curves.easeIn))
+              .value;
+
+          return Opacity(
+            opacity: animation.value,
+            child: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.identity()
+                ..scaleByDouble(scale, scale, scale, 1)
+                ..rotateZ(rotate),
+              child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.deepPurple.withValues(alpha: shadowOpacity),
+                      blurRadius: 24,
+                      spreadRadius: 2,
+                    ),
+                  ],
+                ),
+                child: child,
+              ),
+            ),
+          );
+        },
+      );
+    },
+  );
 }
