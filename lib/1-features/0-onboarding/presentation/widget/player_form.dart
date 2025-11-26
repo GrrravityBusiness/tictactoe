@@ -16,7 +16,7 @@ class PlayerForm extends StatelessWidget {
         const PlayerTextField(),
         IconButton(
           onPressed: context.read<PlayerController>().deletePlayer,
-          icon: const Icon(Icons.delete),
+          icon: const Icon(Icons.clear),
         ),
       ],
     );

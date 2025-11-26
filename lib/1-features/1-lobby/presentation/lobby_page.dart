@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tictactoe/core/router/routes.dart';
 import 'package:tictactoe/core/services/theme/presentation/widget/theme_switcher.dart';
+import 'package:tictactoe/core/widgets/buttons.dart';
 
 class LobbyPage extends StatelessWidget {
   const LobbyPage({super.key});
@@ -16,9 +17,9 @@ class LobbyPage extends StatelessWidget {
             children: [
               const Text('Hello World!'),
               const ThemeSwitcherWidget(),
-              TextButton(
+              SimpleTextButton.secondary(
                 onPressed: () => context.go(AppRoutes.onboarding),
-                child: const Text('Go to Onboarding'),
+                text: 'Go to Onboarding',
               ),
             ],
           ),
