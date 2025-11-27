@@ -92,6 +92,7 @@ class _GamePageState extends State<GamePage> {
               builder: (context, state) {
                 return LayoutBuilder(
                   builder: (context, constraints) {
+                    final theme = Theme.of(context);
                     return AspectRatio(
                       aspectRatio: 1,
                       child: GestureDetector(
@@ -116,8 +117,16 @@ class _GamePageState extends State<GamePage> {
                                   toggleLoad();
                                 }
                               },
-                        child: TicTacToePainter(
-                          board: state.board,
+                        child: Container(
+                          decoration: theme.brightness == Brightness.dark
+                              ? null
+                              : BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.4),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                          child: TicTacToePainter(
+                            board: state.board,
+                          ),
                         ),
                       ),
                     );

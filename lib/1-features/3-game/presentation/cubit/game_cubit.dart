@@ -7,8 +7,8 @@ class GameController extends Cubit<GameState> {
     required String player2,
   }) : super(
          GameState(
-           player1: Gamer(name: player1, remainingCounts: 4, wins: 0),
-           player2: Gamer(name: player2, remainingCounts: 5, wins: 0),
+           player1: Gamer(name: player1, remainingCounts: 5, wins: 0),
+           player2: Gamer(name: player2, remainingCounts: 4, wins: 0),
            currentPlayer: 1,
            board: List.filled(9, -1),
          ),
@@ -24,7 +24,9 @@ class GameController extends Cubit<GameState> {
     final nextPlayer = state.currentPlayer == 1 ? 2 : 1;
     if (move.value == 1) {
       final updatedPlayer1 = state.player1.copyWith(
-        remainingCounts: state.player1.remainingCounts - 1,
+        remainingCounts: state.player1.remainingCounts > 0
+            ? state.player1.remainingCounts - 1
+            : 0,
       );
       emit(
         state.copyWith(
@@ -35,7 +37,9 @@ class GameController extends Cubit<GameState> {
       );
     } else {
       final updatedPlayer2 = state.player2.copyWith(
-        remainingCounts: state.player2.remainingCounts - 1,
+        remainingCounts: state.player2.remainingCounts > 0
+            ? state.player2.remainingCounts - 1
+            : 0,
       );
       emit(
         state.copyWith(
