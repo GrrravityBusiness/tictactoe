@@ -27,7 +27,7 @@ class ThemeTypography extends TextStyle {
          fontFamily: baseFontFamilly,
        );
 
-  static const baseFontFamilly = 'Tilt Neon';
+  static const baseFontFamilly = 'Gluten';
 
   static const textTheme = TextTheme(
     displayLarge: ThemeTypography(

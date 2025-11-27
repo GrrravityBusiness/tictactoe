@@ -6,6 +6,7 @@ import 'package:tictactoe/1-features/0-onboarding/presentation/widget/player_for
 import 'package:tictactoe/1-features/0-onboarding/presentation/widget/title_header.dart';
 import 'package:tictactoe/1-features/0-onboarding/presentation/widget/validate_onboarding_button.dart';
 import 'package:tictactoe/core/localization/app_localizations.dart';
+import 'package:tictactoe/core/widgets/gradiant_scaffold.dart';
 import 'package:tictactoe/core/widgets/snackbar.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -13,7 +14,6 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
     return PopScope(
       canPop: context.select<PlayerController, bool>(
@@ -28,47 +28,33 @@ class OnboardingPage extends StatelessWidget {
           title: l10n.onboarding_prevent_close_title,
         );
       },
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  if (theme.brightness == Brightness.dark)
-                    theme.colorScheme.onPrimary
-                  else
-                    theme.colorScheme.primary,
-                  if (theme.brightness == Brightness.dark)
-                    theme.colorScheme.onSecondary
-                  else
-                    theme.colorScheme.onPrimary,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 32,
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 16),
-                    const TitleHeader(),
-                    const SizedBox(height: 32),
-                    Text(l10n.onboarding_step_add_name),
-                    const SizedBox(height: 8),
-                    const PlayerForm(),
-                    const SizedBox(height: 24),
-                    const ValidateOnboardingButton(),
-                  ],
+      child: GradientScaffold(
+        body: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 32,
+                  ),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 16),
+                      const TitleHeader(),
+                      const SizedBox(height: 32),
+                      Text(l10n.onboarding_step_add_name),
+                      const SizedBox(height: 8),
+                      const PlayerForm(),
+                      const SizedBox(height: 24),
+                      const ValidateOnboardingButton(),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );

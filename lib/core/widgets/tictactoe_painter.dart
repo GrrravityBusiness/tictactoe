@@ -260,10 +260,6 @@ class _TicTacToeBoardPainter extends CustomPainter {
     }
   }
 
-  double _getStrokeWidth(double cellSize) {
-    return cellSize * 0.1;
-  }
-
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
