@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tictactoe/1-features/0-onboarding/presentation/cubit/player_cubit.dart';
-import 'package:tictactoe/1-features/0-onboarding/presentation/cubit/player_state.dart';
 import 'package:tictactoe/1-features/1-lobby/presentation/cubit/lobby_cubit.dart';
+import 'package:tictactoe/1-features/1-lobby/presentation/cubit/lobby_state.dart';
 import 'package:tictactoe/core/localization/app_localizations.dart';
 import 'package:tictactoe/core/services/theme/domain/entities/theme_ext.dart';
+import 'package:tictactoe/core/utils/async_value.dart';
 
 class OpponentFormField extends StatelessWidget {
   const OpponentFormField({super.key});
@@ -51,19 +51,19 @@ class _PlayerTextFieldState extends State<_PlayerTextField> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return BlocListener<PlayerController, PlayerState>(
+    return BlocListener<LobbyController, AsyncValue<LobbyData, void>>(
       listener: (context, state) {
-        if (state.player == null) {
+        if (state.data?.opponent == null) {
           _nameInputController.clear();
         } else {
-          _nameInputController.text = state.player!.name;
+          _nameInputController.text = state.data!.opponent!.name;
         }
       },
       listenWhen: (prev, curr) {
-        if (prev.player != null && curr.player == null) {
+        if (prev.data?.opponent != null && curr.data?.opponent == null) {
           return true;
         }
-        if (_nameInputController.text == '' && curr.player != null) {
+        if (_nameInputController.text == '' && curr.data?.opponent != null) {
           return true;
         }
         return false;
@@ -77,6 +77,11 @@ class _PlayerTextFieldState extends State<_PlayerTextField> {
             labelText: l10n.lobby_field_opponent_label,
           ),
           controller: _nameInputController,
+          onChanged: (value) {
+            if (value.isNotEmpty) {
+              context.read<LobbyController>().setOpponent(name: value);
+            }
+          },
           onFieldSubmitted: (value) =>
               context.read<LobbyController>().setOpponent(name: value),
         ),

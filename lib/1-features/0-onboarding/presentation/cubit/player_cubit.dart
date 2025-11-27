@@ -32,7 +32,12 @@ class PlayerController extends Cubit<PlayerState> {
   /// Set current state with new player name and emit a change
   void setPlayer({required String name}) {
     final player = Player(name: name);
-    emit(state.copyWith(player: player));
+    emit(
+      state.copyWith(
+        player: player,
+        saved: name.isNotEmpty && name == state.player?.name,
+      ),
+    );
   }
 
   /// Load the player from local storage and emit a state change with the given

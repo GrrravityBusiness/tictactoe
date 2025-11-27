@@ -7,7 +7,6 @@ class TitleHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
     return Column(
       children: [
@@ -24,9 +23,10 @@ class TitleHeader extends StatelessWidget {
               ),
             ],
           ),
+          textAlign: TextAlign.center,
         ),
         const SizedBox(height: 32),
-        TicTacToePainter(theme: theme),
+        TicTacToePainter(),
       ],
     );
   }

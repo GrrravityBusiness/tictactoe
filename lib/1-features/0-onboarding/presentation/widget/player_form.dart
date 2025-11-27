@@ -78,6 +78,12 @@ class _PlayerTextFieldState extends State<PlayerTextField> {
           controller: _nameInputController,
           onFieldSubmitted: (value) =>
               context.read<PlayerController>().setPlayer(name: value),
+
+          onChanged: (value) {
+            if (value.isNotEmpty) {
+              context.read<PlayerController>().setPlayer(name: value);
+            }
+          },
         ),
       ),
     );

@@ -16,20 +16,25 @@ class LobbyHeader extends StatelessWidget {
     final theme = Theme.of(context);
     return Column(
       children: [
-        Text(
-          l10n.lobby_welcome_message(
-            playerName,
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: context.dsTokens.spacing.medium,
           ),
-          style: theme.textTheme.headlineMedium,
-          maxLines: 2,
-          textAlign: TextAlign.center,
+          child: Text(
+            l10n.lobby_welcome_message(
+              playerName,
+            ),
+            style: theme.textTheme.headlineMedium,
+            maxLines: 2,
+            textAlign: TextAlign.center,
+          ),
         ),
         Container(
           height: 200,
           padding: EdgeInsets.all(
             context.dsTokens.spacing.large,
           ),
-          child: TicTacToePainter(theme: theme),
+          child: TicTacToePainter(),
         ),
       ],
     );
