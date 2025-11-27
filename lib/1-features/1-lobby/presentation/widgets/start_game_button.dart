@@ -23,7 +23,13 @@ class StartGameButton extends StatelessWidget {
               ? () async {
                   await context.read<LobbyController>().saveOpponent();
                   if (context.mounted) {
-                    context.go(AppRoutes.onboarding);
+                    context.goNamed(
+                      AppRoutes.game,
+                      queryParameters: {
+                        'player1': state.dataOrThrow.player.name,
+                        'player2': state.dataOrThrow.opponent!.name,
+                      },
+                    );
                   }
                 }
               : null,

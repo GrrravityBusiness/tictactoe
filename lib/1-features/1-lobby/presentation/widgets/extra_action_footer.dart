@@ -17,7 +17,7 @@ class ExtraActionsFooter extends StatelessWidget {
       mainAxisAlignment: .center,
       children: [
         SimpleTextButton.transparent(
-          onPressed: () async => context.push(AppRoutes.onboarding),
+          onPressed: () async => context.pushNamed(AppRoutes.onboarding),
           text: l10n.nav_go_to_onboarding,
         ),
         SimpleTextButton.transparent(

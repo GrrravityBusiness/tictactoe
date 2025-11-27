@@ -22,7 +22,7 @@ class ValidateOnboardingButton extends StatelessWidget {
               ? () async {
                   await context.read<PlayerController>().savePlayer();
                   if (context.mounted) {
-                    context.go(AppRoutes.lobby);
+                    context.goNamed(AppRoutes.lobby);
                   }
                 }
               : null,

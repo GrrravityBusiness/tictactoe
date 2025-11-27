@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tictactoe/1-features/0-onboarding/presentation/cubit/player_cubit.dart';
 import 'package:tictactoe/1-features/0-onboarding/presentation/onboarding_page.dart';
 import 'package:tictactoe/1-features/1-lobby/presentation/lobby_page.dart';
+import 'package:tictactoe/1-features/3-game/presentation/game_page.dart';
 import 'package:tictactoe/core/router/routes.dart';
 import 'package:tictactoe/core/utils/logger.dart';
 
@@ -16,13 +17,31 @@ class AppNavigator {
       initialLocation: AppRoutes.initialRoute,
       routes: [
         GoRoute(
+          name: AppRoutes.lobby,
           path: AppRoutes.lobby,
           pageBuilder: (context, state) => _customPageTransition(
             key: state.pageKey,
             child: const LobbyPage(),
           ),
+          routes: [
+            GoRoute(
+              name: AppRoutes.game,
+              path: AppRoutes.game,
+              pageBuilder: (context, state) {
+                final query = state.uri.queryParameters;
+                return _customPageTransition(
+                  key: state.pageKey,
+                  child: GamePage(
+                    player1: query['player1'] ?? '',
+                    player2: query['player2'] ?? '',
+                  ),
+                );
+              },
+            ),
+          ],
         ),
         GoRoute(
+          name: AppRoutes.onboarding,
           path: AppRoutes.onboarding,
           pageBuilder: (context, state) => _customPageTransition(
             key: state.pageKey,
