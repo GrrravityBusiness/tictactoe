@@ -101,7 +101,7 @@ abstract class AppLocalizations {
   /// No description provided for @nav_go_to_onboarding.
   ///
   /// In fr, this message translates to:
-  /// **'Aller sur l\'onboarding'**
+  /// **'Changer de nom'**
   String get nav_go_to_onboarding;
 
   /// No description provided for @onboarding_step_add_name.
@@ -163,6 +163,126 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Une erreur s\'est produite'**
   String get lobby_page_error_message;
+
+  /// No description provided for @tictactoe_x.
+  ///
+  /// In fr, this message translates to:
+  /// **'X'**
+  String get tictactoe_x;
+
+  /// No description provided for @tictactoe_o.
+  ///
+  /// In fr, this message translates to:
+  /// **'O'**
+  String get tictactoe_o;
+
+  /// No description provided for @rule_one.
+  ///
+  /// In fr, this message translates to:
+  /// **'1. Le jeu se joue sur une grille de 3x3.\n\n'**
+  String get rule_one;
+
+  /// No description provided for @rule_two_1.
+  ///
+  /// In fr, this message translates to:
+  /// **'2. Deux joueurs jouent à tour de rôle : l\'un est '**
+  String get rule_two_1;
+
+  /// No description provided for @rule_two_2.
+  ///
+  /// In fr, this message translates to:
+  /// **', l\'autre est '**
+  String get rule_two_2;
+
+  /// No description provided for @rule_two_3.
+  ///
+  /// In fr, this message translates to:
+  /// **'.\n\n'**
+  String get rule_two_3;
+
+  /// No description provided for @rule_four.
+  ///
+  /// In fr, this message translates to:
+  /// **'4. Le premier joueur à aligner 3 de ses symboles (verticalement, horizontalement ou en diagonale) gagne.\n\n'**
+  String get rule_four;
+
+  /// No description provided for @rule_three.
+  ///
+  /// In fr, this message translates to:
+  /// **'3. Les joueurs marquent les cases vides avec leur symbole.\n\n'**
+  String get rule_three;
+
+  /// No description provided for @rule_five.
+  ///
+  /// In fr, this message translates to:
+  /// **'5. Si les 9 cases sont remplies et qu\'aucun joueur n\'a aligné 3 symboles, c\'est une égalité.'**
+  String get rule_five;
+
+  /// No description provided for @rule_title.
+  ///
+  /// In fr, this message translates to:
+  /// **'Règles du TicTacToe'**
+  String get rule_title;
+
+  /// No description provided for @rule_cases_example.
+  ///
+  /// In fr, this message translates to:
+  /// **'Exemples :'**
+  String get rule_cases_example;
+
+  /// No description provided for @rule_horizontal_x_win.
+  ///
+  /// In fr, this message translates to:
+  /// **'X gagne (horizontal)'**
+  String get rule_horizontal_x_win;
+
+  /// No description provided for @rule_diagonal_0_win.
+  ///
+  /// In fr, this message translates to:
+  /// **'O gagne (diagonale)'**
+  String get rule_diagonal_0_win;
+
+  /// No description provided for @rule_vertical_o_win.
+  ///
+  /// In fr, this message translates to:
+  /// **'O gagne (vertical)'**
+  String get rule_vertical_o_win;
+
+  /// No description provided for @rule_draw.
+  ///
+  /// In fr, this message translates to:
+  /// **'Match nul (aucun gagnant)'**
+  String get rule_draw;
+
+  /// No description provided for @lobby_see_rules.
+  ///
+  /// In fr, this message translates to:
+  /// **'Voir les règles du jeu'**
+  String get lobby_see_rules;
+
+  /// No description provided for @lobby_start_game.
+  ///
+  /// In fr, this message translates to:
+  /// **'Démarrer la partie !'**
+  String get lobby_start_game;
+
+  /// No description provided for @lobby_scoreboard_title.
+  ///
+  /// In fr, this message translates to:
+  /// **'Scores'**
+  String get lobby_scoreboard_title;
+
+  /// No description provided for @scoreboard_vs_draw.
+  ///
+  /// In fr, this message translates to:
+  /// **'🤝 VS 🤝'**
+  String get scoreboard_vs_draw;
+
+  /// No description provided for @scoreboard_vs_winner.
+  ///
+  /// In fr, this message translates to:
+  /// **'🔥 VS 🔥'**
+  String get scoreboard_vs_winner;
 }
 
 class _AppLocalizationsDelegate

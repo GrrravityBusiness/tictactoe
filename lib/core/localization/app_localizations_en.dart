@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get nav_go_to_onboarding => 'Go to Onboarding';
+  String get nav_go_to_onboarding => 'Change my name';
 
   @override
   String get onboarding_step_add_name => 'Start by creating your player name';
@@ -43,4 +43,67 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lobby_page_error_message => 'An error occurred';
+
+  @override
+  String get tictactoe_x => 'X';
+
+  @override
+  String get tictactoe_o => 'O';
+
+  @override
+  String get rule_one => '1. The game is played on a 3x3 grid.\n\n';
+
+  @override
+  String get rule_two_1 => '2. Two players take turns: one is ';
+
+  @override
+  String get rule_two_2 => ', the other is ';
+
+  @override
+  String get rule_two_3 => '.\n\n';
+
+  @override
+  String get rule_four =>
+      '4. The first player to get 3 of their marks in a row (vertically, horizontally, or diagonally) wins.\n\n';
+
+  @override
+  String get rule_three =>
+      '3. Players mark empty squares with their symbol.\n\n';
+
+  @override
+  String get rule_five =>
+      '5. If all 9 squares are filled and no player has 3 in a row, the game is a draw.';
+
+  @override
+  String get rule_title => 'TicTacToe Rules';
+
+  @override
+  String get rule_cases_example => 'Examples:';
+
+  @override
+  String get rule_horizontal_x_win => 'X wins (horizontal)';
+
+  @override
+  String get rule_diagonal_0_win => 'O wins (diagonal)';
+
+  @override
+  String get rule_vertical_o_win => 'O wins (vertical)';
+
+  @override
+  String get rule_draw => 'Draw (no winner)';
+
+  @override
+  String get lobby_see_rules => 'Check game rules';
+
+  @override
+  String get lobby_start_game => 'Start !';
+
+  @override
+  String get lobby_scoreboard_title => 'Scoreboard';
+
+  @override
+  String get scoreboard_vs_draw => '🤝 VS 🤝';
+
+  @override
+  String get scoreboard_vs_winner => '🔥 VS 🔥';
 }

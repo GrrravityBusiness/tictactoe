@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum SimpleTextButtonStyle { primary, secondary, danger }
+enum SimpleTextButtonStyle { primary, secondary, danger, transparent }
 
 class SimpleTextButton extends StatelessWidget {
   const SimpleTextButton({
@@ -27,6 +27,16 @@ class SimpleTextButton extends StatelessWidget {
     style: SimpleTextButtonStyle.secondary,
   );
 
+  factory SimpleTextButton.transparent({
+    required String text,
+    required VoidCallback? onPressed,
+  }) => SimpleTextButton(
+    text: text,
+    onPressed: onPressed,
+    style: SimpleTextButtonStyle
+        .transparent, // You may want to add a new style for transparent
+  );
+
   factory SimpleTextButton.danger({
     required String text,
     required VoidCallback? onPressed,
@@ -41,6 +51,7 @@ class SimpleTextButton extends StatelessWidget {
 
   ButtonStyle _getButtonStyle(BuildContext context) {
     final isEnabled = onPressed != null;
+    final theme = Theme.of(context);
     switch (style) {
       case SimpleTextButtonStyle.primary:
         return TextButton.styleFrom(
@@ -48,18 +59,18 @@ class SimpleTextButton extends StatelessWidget {
               ? Colors.white
               : Colors.white.withValues(alpha: 0.5),
           backgroundColor: isEnabled
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).primaryColor.withValues(alpha: 0.5),
+              ? theme.primaryColor
+              : theme.primaryColor.withValues(alpha: 0.5),
         );
       case SimpleTextButtonStyle.secondary:
         return TextButton.styleFrom(
           foregroundColor: isEnabled
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).primaryColor.withValues(alpha: 0.5),
+              ? theme.primaryColor
+              : theme.primaryColor.withValues(alpha: 0.5),
           backgroundColor: isEnabled
               ? Colors.white
               : Colors.white.withValues(alpha: 0.5),
-          side: BorderSide(color: Theme.of(context).primaryColor),
+          side: BorderSide(color: theme.primaryColor),
         );
       case SimpleTextButtonStyle.danger:
         return TextButton.styleFrom(
@@ -69,6 +80,14 @@ class SimpleTextButton extends StatelessWidget {
           backgroundColor: isEnabled
               ? Colors.red
               : Colors.red.withValues(alpha: 0.5),
+        );
+      case SimpleTextButtonStyle.transparent:
+        return TextButton.styleFrom(
+          foregroundColor: isEnabled
+              ? theme.colorScheme.secondary
+              : theme.colorScheme.secondary.withValues(alpha: 0.5),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
         );
     }
   }
