@@ -106,4 +106,29 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get scoreboard_vs_winner => '🔥 VS 🔥';
+
+  @override
+  String game_personal_score(int gamerWins) {
+    return 'Score: $gamerWins';
+  }
+
+  @override
+  String get game_result_dialog_label => 'Résultat';
+
+  @override
+  String get game_result_back_lobby_action => 'Accueil';
+
+  @override
+  String get game_result_continue_play_action => 'Rejouer';
+
+  @override
+  String get game_result_draw_text => 'Match nul !';
+
+  @override
+  String game_result_winner_text(String winnerName) {
+    return '$winnerName gagne !';
+  }
+
+  @override
+  String get game_result_vs_text => '🔥 VS 🔥';
 }

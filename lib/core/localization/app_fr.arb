@@ -36,5 +36,26 @@
   "lobby_start_game": "Démarrer la partie !",
   "lobby_scoreboard_title": "Scores",
   "scoreboard_vs_draw": "🤝 VS 🤝",
-  "scoreboard_vs_winner": "🔥 VS 🔥"
+  "scoreboard_vs_winner": "🔥 VS 🔥",
+  "game_personal_score": "Score: {gamerWins}",
+  "@game_personal_score": {
+    "placeholders": {
+      "gamerWins": {
+        "type": "int"
+      }
+    }
+  },
+  "game_result_dialog_label": "Résultat",
+  "game_result_back_lobby_action": "Accueil",
+  "game_result_continue_play_action": "Rejouer",
+  "game_result_draw_text": "Match nul !",
+  "game_result_winner_text": "{winnerName} gagne !",
+  "@game_result_winner_text": {
+    "placeholders": {
+      "winnerName": {
+        "type": "String"
+      }
+    }
+  },
+  "game_result_vs_text": "🔥 VS 🔥"
 }

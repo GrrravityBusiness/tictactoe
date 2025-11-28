@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tictactoe/core/utils/game_utils.dart';
 
 class TicTacToePainter extends StatelessWidget {
   const TicTacToePainter({
@@ -106,7 +107,7 @@ class _TicTacToeBoardPainter extends CustomPainter {
       }
       if (element == 0) {
         // Draw O centered in cell
-        _paint0(
+        _paintO(
           canvas: canvas,
           center: center,
           cellSize: cellSize,
@@ -117,23 +118,25 @@ class _TicTacToeBoardPainter extends CustomPainter {
     }
 
     // Draw win line if any
-    for (final winner in [1, 0]) {
+    for (final winningCandidate in XorO.values) {
       _drawWinLine(
         canvas: canvas,
         size: size,
-        winner: winner,
-        paint: winner == 1 ? xPaint : oPaint,
+        winningValue: winningCandidate.symbolValue,
+        paint: winningCandidate == XorO.x ? xPaint : oPaint,
       );
     }
   }
 
+  /// Converts a board index (0-8) to (x,y) coordinates.
   ({int x, int y}) _posFromIndex(int index) {
     final x = index % 3;
     final y = index ~/ 3;
     return (x: x, y: y);
   }
 
-  void _paint0({
+  /// Draws a stylized O centered in a cell.
+  void _paintO({
     required Canvas canvas,
     required Offset center,
     required double cellSize,
@@ -143,6 +146,7 @@ class _TicTacToeBoardPainter extends CustomPainter {
     canvas.drawCircle(center, cellSize / 2 - padding, paint);
   }
 
+  /// Draws a stylized X centered in a cell.
   void _paintX({
     required Canvas canvas,
     required Offset center,
@@ -175,6 +179,7 @@ class _TicTacToeBoardPainter extends CustomPainter {
       );
   }
 
+  /// Draws the Tic Tac Toe grid.
   void _paintGrid({
     required Canvas canvas,
     required double cellSize,
@@ -198,10 +203,11 @@ class _TicTacToeBoardPainter extends CustomPainter {
     }
   }
 
+  /// Draws a line over the winning pattern where applicable.
   void _drawWinLine({
     required Canvas canvas,
     required Size size,
-    required int winner,
+    required int winningValue,
     required Paint paint,
   }) {
     final cellSize = size.width / 3;
@@ -209,54 +215,39 @@ class _TicTacToeBoardPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..color = winLineColor;
 
-    // All possible win lines: (startCell, endCell)
-    final winPatterns = [
-      // Rows
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      // Columns
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      // Diagonals
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
+    final winPattern = GameUtils.getWinningPattern(board, winningValue);
 
-    for (final pattern in winPatterns) {
-      if (board[pattern[0]] == winner &&
-          board[pattern[1]] == winner &&
-          board[pattern[2]] == winner) {
-        // Calculate start and end points for the line
-        Offset start;
-        Offset end;
-        if (pattern[0] ~/ 3 == pattern[1] ~/ 3 &&
-            pattern[1] ~/ 3 == pattern[2] ~/ 3) {
-          // Horizontal
-          final row = pattern[0] ~/ 3;
-          start = Offset(cellSize * 0.1, cellSize * (row + 0.5));
-          end = Offset(cellSize * 2.9, cellSize * (row + 0.5));
-        } else if (pattern[0] % 3 == pattern[1] % 3 &&
-            pattern[1] % 3 == pattern[2] % 3) {
-          // Vertical
-          final col = pattern[0] % 3;
-          start = Offset(cellSize * (col + 0.5), cellSize * 0.1);
-          end = Offset(cellSize * (col + 0.5), cellSize * 2.9);
-        } else if (pattern[0] == 0 && pattern[1] == 4 && pattern[2] == 8) {
-          // Diagonal top-left to bottom-right
-          start = Offset(cellSize * 0.1, cellSize * 0.1);
-          end = Offset(cellSize * 2.9, cellSize * 2.9);
-        } else if (pattern[0] == 2 && pattern[1] == 4 && pattern[2] == 6) {
-          // Diagonal top-right to bottom-left
-          start = Offset(cellSize * 2.9, cellSize * 0.1);
-          end = Offset(cellSize * 0.1, cellSize * 2.9);
-        } else {
-          continue;
-        }
-        canvas.drawLine(start, end, winPaint);
-        break;
+    if (winPattern != null) {
+      Offset start;
+      Offset end;
+      if (winPattern[0] ~/ 3 == winPattern[1] ~/ 3 &&
+          winPattern[1] ~/ 3 == winPattern[2] ~/ 3) {
+        // Horizontal
+        final row = winPattern[0] ~/ 3;
+        start = Offset(cellSize * 0.1, cellSize * (row + 0.5));
+        end = Offset(cellSize * 2.9, cellSize * (row + 0.5));
+      } else if (winPattern[0] % 3 == winPattern[1] % 3 &&
+          winPattern[1] % 3 == winPattern[2] % 3) {
+        // Vertical
+        final col = winPattern[0] % 3;
+        start = Offset(cellSize * (col + 0.5), cellSize * 0.1);
+        end = Offset(cellSize * (col + 0.5), cellSize * 2.9);
+      } else if (winPattern[0] == 0 &&
+          winPattern[1] == 4 &&
+          winPattern[2] == 8) {
+        // Diagonal top-left to bottom-right
+        start = Offset(cellSize * 0.1, cellSize * 0.1);
+        end = Offset(cellSize * 2.9, cellSize * 2.9);
+      } else if (winPattern[0] == 2 &&
+          winPattern[1] == 4 &&
+          winPattern[2] == 6) {
+        // Diagonal top-right to bottom-left
+        start = Offset(cellSize * 2.9, cellSize * 0.1);
+        end = Offset(cellSize * 0.1, cellSize * 2.9);
+      } else {
+        return;
       }
+      canvas.drawLine(start, end, winPaint);
     }
   }
 

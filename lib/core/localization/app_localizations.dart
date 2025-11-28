@@ -283,6 +283,48 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'🔥 VS 🔥'**
   String get scoreboard_vs_winner;
+
+  /// No description provided for @game_personal_score.
+  ///
+  /// In fr, this message translates to:
+  /// **'Score: {gamerWins}'**
+  String game_personal_score(int gamerWins);
+
+  /// No description provided for @game_result_dialog_label.
+  ///
+  /// In fr, this message translates to:
+  /// **'Résultat'**
+  String get game_result_dialog_label;
+
+  /// No description provided for @game_result_back_lobby_action.
+  ///
+  /// In fr, this message translates to:
+  /// **'Accueil'**
+  String get game_result_back_lobby_action;
+
+  /// No description provided for @game_result_continue_play_action.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rejouer'**
+  String get game_result_continue_play_action;
+
+  /// No description provided for @game_result_draw_text.
+  ///
+  /// In fr, this message translates to:
+  /// **'Match nul !'**
+  String get game_result_draw_text;
+
+  /// No description provided for @game_result_winner_text.
+  ///
+  /// In fr, this message translates to:
+  /// **'{winnerName} gagne !'**
+  String game_result_winner_text(String winnerName);
+
+  /// No description provided for @game_result_vs_text.
+  ///
+  /// In fr, this message translates to:
+  /// **'🔥 VS 🔥'**
+  String get game_result_vs_text;
 }
 
 class _AppLocalizationsDelegate
