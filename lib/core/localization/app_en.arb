@@ -1,0 +1,61 @@
+{
+  "nav_go_to_onboarding": "Change my name",
+  "onboarding_step_add_name": "Start by creating your player name",
+  "onboarding_action_validate_name": "That's my name !",
+  "onboarding_welcome_title": "Welcome on TicTacToe",
+  "onboarding_field_playername_label": "Player Name",
+  "theme_action_toggle": "Toggle Theme",
+  "onboarding_prevent_close_title": "You have to set yourself a name before leaving!",
+  "lobby_welcome_message": "Hello {playerName}, ready to play ?",
+  "@lobby_welcome_message": {
+    "placeholders": {
+      "playerName": {
+        "type": "String"
+      }
+    }
+  },
+  "lobby_field_opponent_label": "Name",
+  "lobby_select_opponent_title": "Name your opponent:",
+  "lobby_page_error_message": "An error occurred",
+  "tictactoe_x": "X",
+  "tictactoe_o": "O",
+  "rule_one": "1. The game is played on a 3x3 grid.\n\n",
+  "rule_two_1": "2. Two players take turns: one is ",
+  "rule_two_2": ", the other is ",
+  "rule_two_3": ".\n\n",
+  "rule_four": "4. The first player to get 3 of their marks in a row (vertically, horizontally, or diagonally) wins.\n\n",
+  "rule_three": "3. Players mark empty squares with their symbol.\n\n",
+  "rule_five": "5. If all 9 squares are filled and no player has 3 in a row, the game is a draw.",
+  "rule_title": "TicTacToe Rules",
+  "rule_cases_example": "Examples:",
+  "rule_horizontal_x_win": "X wins (horizontal)",
+  "rule_diagonal_0_win": "O wins (diagonal)",
+  "rule_vertical_o_win": "O wins (vertical)",
+  "rule_draw": "Draw (no winner)",
+  "lobby_see_rules": "Check game rules",
+  "lobby_start_game": "Start !",
+  "lobby_scoreboard_title": "Scoreboard",
+  "scoreboard_vs_draw": "🤝 VS 🤝",
+  "scoreboard_vs_winner": "🔥 VS 🔥",
+  "game_personal_score": "Score: {gamerWins}",
+  "@game_personal_score": {
+    "placeholders": {
+      "gamerWins": {
+        "type": "int"
+      }
+    }
+  },
+  "game_result_dialog_label": "Game Result",
+  "game_result_back_lobby_action": "Back to Lobby",
+  "game_result_continue_play_action": "Play Again",
+  "game_result_draw_text": "It's a Draw!",
+  "game_result_winner_text": "{winnerName} Wins !",
+  "@game_result_winner_text": {
+    "placeholders": {
+      "winnerName": {
+        "type": "String"
+      }
+    }
+  },
+  "game_result_vs_text": "🔥 VS 🔥"
+}
