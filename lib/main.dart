@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tictactoe/1-features/0-onboarding/domain/usecases/player_usecase.dart';
 import 'package:tictactoe/1-features/0-onboarding/presentation/cubit/player_cubit.dart';
 import 'package:tictactoe/core/localization/app_localizations.dart';
@@ -11,6 +12,10 @@ import 'package:tictactoe/core/utils/constants.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Setup SharedPreferences with a custom prefix for env isolation
+  SharedPreferences.setPrefix(Constants.storagePath);
+
   await DependencyManager.initDependencies();
   runApp(const MainApp());
 }
