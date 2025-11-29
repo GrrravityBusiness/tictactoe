@@ -40,49 +40,70 @@ void main() {
       datasource = HistorySource(sharedPreferences: prefs);
     });
 
-    test('getHistories returns saved histories', () {
-      final histories = [makeHistory(), makeHistory(score: 2)];
-      final encoded = histories.map((e) => jsonEncode(e.toJson())).toList();
-      when(() => prefs.getStringList(any())).thenReturn(encoded);
-      final result = datasource.getHistories();
-      expect(result.isRight(), isTrue);
-      final list = result.getOrElse(() => []);
-      expect(list.length, 2);
-      expect(list.first.playerScore.points, 1);
-      expect(list.last.playerScore.points, 2);
-      verify(() => prefs.getStringList(HistorySource.historyKey)).called(1);
-    });
+    group('getHistories', () {
+      test('returns saved histories', () {
+        final histories = [makeHistory(), makeHistory(score: 2)];
+        final encoded = histories.map((e) => jsonEncode(e.toJson())).toList();
 
-    test('getHistories returns empty list if nothing saved', () {
-      when(() => prefs.getStringList(any())).thenReturn(null);
-      final result = datasource.getHistories();
-      expect(result.isRight(), isTrue);
-      expect(result.getOrElse(() => []), isEmpty);
-      verify(() => prefs.getStringList(HistorySource.historyKey)).called(1);
-    });
+        when(() => prefs.getStringList(any())).thenReturn(encoded);
 
-    test('getHistories returns Failure on exception', () {
-      when(
-        () => prefs.getStringList(any()),
-      ).thenThrow(Exception('Failed to get'));
-      final result = datasource.getHistories();
-      expect(result.isLeft(), isTrue);
-      expect(result.fold((l) => l, (r) => null), isA<Failure>());
-    });
+        final result = datasource.getHistories();
 
-    test('clearHistories removes all histories', () async {
-      when(() => prefs.remove(any())).thenAnswer((_) async => true);
-      final result = await datasource.clearHistories();
-      expect(result.isRight(), isTrue);
-      expect(result.getOrElse(() => false), isTrue);
-      verify(() => prefs.remove(HistorySource.historyKey)).called(1);
-    });
+        expect(result.isRight(), isTrue);
 
-    test('clearHistories returns Failure on exception', () async {
-      when(() => prefs.remove(any())).thenThrow(Exception('Failed to remove'));
-      final result = await datasource.clearHistories();
-      expect(result.isLeft(), isTrue);
-      expect(result.fold((l) => l, (r) => null), isA<Failure>());
+        final list = result.getOrElse(() => []);
+
+        expect(list.length, 2);
+        expect(list.first.playerScore.points, 1);
+        expect(list.last.playerScore.points, 2);
+
+        verify(() => prefs.getStringList(HistorySource.historyKey)).called(1);
+      });
+
+      test('returns empty list if nothing saved', () {
+        when(() => prefs.getStringList(any())).thenReturn(null);
+
+        final result = datasource.getHistories();
+
+        expect(result.isRight(), isTrue);
+        expect(result.getOrElse(() => []), isEmpty);
+
+        verify(() => prefs.getStringList(HistorySource.historyKey)).called(1);
+      });
+
+      test('returns Failure on exception', () {
+        when(
+          () => prefs.getStringList(any()),
+        ).thenThrow(Exception('Failed to get'));
+
+        final result = datasource.getHistories();
+
+        expect(result.isLeft(), isTrue);
+        expect(result.fold((l) => l, (r) => null), isA<Failure>());
+      });
+    });
+    group('clearHistories', () {
+      test('removes all histories', () async {
+        when(() => prefs.remove(any())).thenAnswer((_) async => true);
+
+        final result = await datasource.clearHistories();
+
+        expect(result.isRight(), isTrue);
+        expect(result.getOrElse(() => false), isTrue);
+
+        verify(() => prefs.remove(HistorySource.historyKey)).called(1);
+      });
+
+      test('returns Failure on exception', () async {
+        when(
+          () => prefs.remove(any()),
+        ).thenThrow(Exception('Failed to remove'));
+
+        final result = await datasource.clearHistories();
+
+        expect(result.isLeft(), isTrue);
+        expect(result.fold((l) => l, (r) => null), isA<Failure>());
+      });
     });
   });
 }
