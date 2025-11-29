@@ -12,10 +12,14 @@ class ScoreRepositoryImpl extends ScoreRepository {
   final ScoreDatasource _scoreDatasource;
 
   @override
+  /// Clear all final scores from local storage.
+  /// might throw [Failure] if something goes wrong during the operation
   Future<Either<Failure, bool>> clearFinalScores() =>
       _scoreDatasource.clearScores();
 
   @override
+  /// Get final scores from local storage.
+  /// might throw [Failure] if something goes wrong during the operation
   Either<Failure, List<FinalScore>> getFinalScores() {
     final scoresOrFailure = _scoreDatasource.getScores();
     return scoresOrFailure.map(
@@ -24,6 +28,11 @@ class ScoreRepositoryImpl extends ScoreRepository {
   }
 
   @override
+  /// Save final scores to local storage.
+  /// might throw [Failure] if something goes wrong during the operation
+  ///
+  /// This will override any existing data, so make sure to retrieve existing
+  /// data first, upsert it, then save it back.
   Future<Either<Failure, bool>> saveFinalScore(
     List<FinalScore> finalScores,
   ) async => _scoreDatasource.saveScore(

@@ -34,6 +34,11 @@ class GameController extends Cubit<GameState> {
 
   final ScoreUsecase _scoreUsecase;
 
+  /// Handle a player's move at the specified index with the given symbol.
+  /// Returns true if the move was successful, false if the cell is already
+  /// occupied.
+  ///
+  /// It will also check for game result, updating the state accordingly.
   bool makeMove(({int index, XorO value}) move) {
     final updatedBoard = List<int>.from(state.board);
     final currentValue = updatedBoard[move.index];
@@ -71,6 +76,10 @@ class GameController extends Cubit<GameState> {
     return true;
   }
 
+  /// Check if game is over by evaluating the current board state.
+  /// Returns a [GameResult] if there's a winner or a draw, otherwise null.
+  ///
+  /// It's not emitting any new state.
   GameResult? _handleGameResult({
     required List<int> board,
     required ({int index, XorO value}) move,
@@ -87,6 +96,15 @@ class GameController extends Cubit<GameState> {
     return result;
   }
 
+  /// Generate a new [Gamer] based on the current state and the game result.
+  /// If [generateMain] is true, it updates player1, otherwise player2.
+  /// It decreases the remaining counts for the player who made the move
+  /// and increases the wins if they won the game.
+  ///
+  /// Returns a new [Gamer] instance with updated values.
+  ///
+  /// It's not emitting any new state, so make sure to use the returned value
+  /// to update the state in the caller function.
   Gamer _handleGamerUpdate({
     required bool generateMain,
     required bool isPlayer1Move,
@@ -118,6 +136,8 @@ class GameController extends Cubit<GameState> {
     }
   }
 
+  /// Continue playing, changing symbols between players and first player too
+  /// as well as resetting the board X / O position.
   void nextGame() {
     final player1NewSymbol = state.player1.symbol == XorO.x ? XorO.o : XorO.x;
     final player2NewSymbol = state.player2.symbol == XorO.x ? XorO.o : XorO.x;
@@ -142,6 +162,12 @@ class GameController extends Cubit<GameState> {
     );
   }
 
+  /// Savinhg scores using [ScoreUsecase]. Generates [FinalScore] from
+  /// current state.
+  ///
+  /// Returns true if saving was successful, false otherwise.
+  ///
+  /// it will not emit any new state.
   Future<bool> saveScores() async {
     final finalScore = FinalScore(
       mainPlayerScore: GamerScore(

@@ -7,6 +7,12 @@ class ScoreUsecase {
 
   final ScoreRepository _scoreRepository;
 
+  /// Save final scores to local storage.
+  /// If there are existing scores, it prepends the new score to the list.
+  /// Returns true if the operation was successful, false otherwise.
+  ///
+  /// If something goes wrong during the operation, it handles the failure
+  /// by deleting existing scores and saving only the new score.
   Future<bool> saveFinalScores(FinalScore finalScore) async {
     final savedScoresOrFailure = _scoreRepository.getFinalScores();
 
