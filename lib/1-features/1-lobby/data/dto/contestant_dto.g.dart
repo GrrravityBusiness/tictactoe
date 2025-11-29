@@ -22,5 +22,5 @@ Map<String, dynamic> _$ContestantDTOToJson(_ContestantDTO instance) =>
 
 const _$TicTacToeSymbolsDTOEnumMap = {
   TicTacToeSymbolsDTO.X: 'x',
-  TicTacToeSymbolsDTO.O: '0',
+  TicTacToeSymbolsDTO.O: 'o',
 };

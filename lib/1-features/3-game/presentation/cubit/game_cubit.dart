@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:tictactoe/1-features/3-game/domain/entities/final_score.dart';
 import 'package:tictactoe/1-features/3-game/domain/entities/game_result.dart';
 import 'package:tictactoe/1-features/3-game/domain/entities/gamer.dart';
+import 'package:tictactoe/1-features/3-game/domain/entities/gamer_score.dart';
+import 'package:tictactoe/1-features/3-game/domain/usecase/score_usecase.dart';
 import 'package:tictactoe/1-features/3-game/presentation/cubit/game_state.dart';
 import 'package:tictactoe/core/utils/game_utils.dart';
 
@@ -8,7 +11,9 @@ class GameController extends Cubit<GameState> {
   GameController({
     required String player1,
     required String player2,
-  }) : super(
+    required ScoreUsecase scoreUsecase,
+  }) : _scoreUsecase = scoreUsecase,
+       super(
          GameState(
            player1: Gamer(
              name: player1,
@@ -26,6 +31,8 @@ class GameController extends Cubit<GameState> {
            board: List.filled(9, -1),
          ),
        );
+
+  final ScoreUsecase _scoreUsecase;
 
   bool makeMove(({int index, XorO value}) move) {
     final updatedBoard = List<int>.from(state.board);
@@ -54,7 +61,7 @@ class GameController extends Cubit<GameState> {
         ),
         player2: _handleGamerUpdate(
           generateMain: false,
-          isPlayer1Move: move.value == state.player2.symbol,
+          isPlayer1Move: move.value == state.player1.symbol,
           result: gameResult,
         ),
         result: gameResult,
@@ -70,7 +77,9 @@ class GameController extends Cubit<GameState> {
   }) {
     GameResult? result;
     if (GameUtils.hasWinner(board)) {
-      result = GameResult(winnningPlayer: move.value == XorO.x ? 1 : 2);
+      result = GameResult(
+        winnningPlayer: move.value == state.player1.symbol ? 1 : 2,
+      );
     }
     if (GameUtils.isDraw(board)) {
       result = const GameResult();
@@ -109,20 +118,6 @@ class GameController extends Cubit<GameState> {
     }
   }
 
-  void updateScores(int winnerPlayer) {
-    if (winnerPlayer == 1) {
-      final updatedScores = state.player1.copyWith(
-        wins: state.player1.wins + 1,
-      );
-      emit(state.copyWith(player1: updatedScores));
-    } else {
-      final updatedScores = state.player2.copyWith(
-        wins: state.player2.wins + 1,
-      );
-      emit(state.copyWith(player2: updatedScores));
-    }
-  }
-
   void nextGame() {
     final player1NewSymbol = state.player1.symbol == XorO.x ? XorO.o : XorO.x;
     final player2NewSymbol = state.player2.symbol == XorO.x ? XorO.o : XorO.x;
@@ -147,5 +142,17 @@ class GameController extends Cubit<GameState> {
     );
   }
 
-  Future<void> saveScores() async {}
+  Future<bool> saveScores() async {
+    final finalScore = FinalScore(
+      mainPlayerScore: GamerScore(
+        points: state.player1.wins,
+        gamer: state.player1.toCmd,
+      ),
+      opponentScore: GamerScore(
+        points: state.player2.wins,
+        gamer: state.player2.toCmd,
+      ),
+    );
+    return _scoreUsecase.saveFinalScores(finalScore);
+  }
 }

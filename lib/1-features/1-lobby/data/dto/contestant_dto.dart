@@ -52,7 +52,7 @@ extension OnContestant on Contestant {
 enum TicTacToeSymbolsDTO {
   @JsonValue('x')
   X,
-  @JsonValue('0')
+  @JsonValue('o')
   O,
 }
 

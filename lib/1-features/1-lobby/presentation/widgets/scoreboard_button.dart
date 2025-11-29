@@ -18,12 +18,17 @@ class ScoreboardButton extends StatelessWidget {
     return BlocBuilder<LobbyController, AsyncValue<LobbyData, void>>(
       builder: (context, state) {
         return IconButton(
-          onPressed: () async => showDialog(
-            context: context,
-            builder: (context) => ScoreBoardModal(
-              histories: state.data?.history ?? [],
-            ),
-          ),
+          onPressed: () async {
+            context.read<LobbyController>().getHistories();
+            final histoties =
+                context.read<LobbyController>().state.data?.history ?? [];
+            return showDialog(
+              context: context,
+              builder: (context) => ScoreBoardModal(
+                histories: histoties,
+              ),
+            );
+          },
           icon: Icon(
             Icons.scoreboard_outlined,
             size: context.dsTokens.icons.xLarge,

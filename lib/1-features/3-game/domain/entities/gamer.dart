@@ -14,3 +14,20 @@ abstract class Gamer with _$Gamer {
 
   const Gamer._();
 }
+
+@freezed
+abstract class GamerCmd with _$GamerCmd {
+  const factory GamerCmd({
+    required String name,
+    required XorO symbol,
+  }) = _GamerCmd;
+
+  const GamerCmd._();
+}
+
+extension OnGamer on Gamer {
+  GamerCmd get toCmd => GamerCmd(
+    name: name,
+    symbol: symbol,
+  );
+}

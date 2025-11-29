@@ -43,7 +43,7 @@ class LobbyController extends Cubit<AsyncValue<LobbyData, void>> {
       ),
     );
     _getOpponent();
-    _getHistories();
+    getHistories();
   }
 
   /// retrieve opponent from local storage and emit state update
@@ -59,7 +59,7 @@ class LobbyController extends Cubit<AsyncValue<LobbyData, void>> {
   }
 
   /// retrieve histories from local storage and emit state update
-  void _getHistories() {
+  void getHistories() {
     final data = state.dataOrThrow;
     final history = _historyUseCase.getHistories();
     emit(

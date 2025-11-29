@@ -25,12 +25,12 @@ $GamerCopyWith<Gamer> get copyWith => _$GamerCopyWithImpl<Gamer>(this as Gamer, 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Gamer&&(identical(other.name, name) || other.name == name)&&(identical(other.remainingCounts, remainingCounts) || other.remainingCounts == remainingCounts)&&(identical(other.wins, wins) || other.wins == wins)&&const DeepCollectionEquality().equals(other.symbol, symbol));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Gamer&&(identical(other.name, name) || other.name == name)&&(identical(other.remainingCounts, remainingCounts) || other.remainingCounts == remainingCounts)&&(identical(other.wins, wins) || other.wins == wins)&&(identical(other.symbol, symbol) || other.symbol == symbol));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,name,remainingCounts,wins,const DeepCollectionEquality().hash(symbol));
+int get hashCode => Object.hash(runtimeType,name,remainingCounts,wins,symbol);
 
 @override
 String toString() {
@@ -62,12 +62,12 @@ class _$GamerCopyWithImpl<$Res>
 
 /// Create a copy of Gamer
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? remainingCounts = null,Object? wins = null,Object? symbol = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? remainingCounts = null,Object? wins = null,Object? symbol = null,}) {
   return _then(_self.copyWith(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,remainingCounts: null == remainingCounts ? _self.remainingCounts : remainingCounts // ignore: cast_nullable_to_non_nullable
 as int,wins: null == wins ? _self.wins : wins // ignore: cast_nullable_to_non_nullable
-as int,symbol: freezed == symbol ? _self.symbol : symbol // ignore: cast_nullable_to_non_nullable
+as int,symbol: null == symbol ? _self.symbol : symbol // ignore: cast_nullable_to_non_nullable
 as XorO,
   ));
 }
@@ -227,12 +227,12 @@ _$GamerCopyWith<_Gamer> get copyWith => __$GamerCopyWithImpl<_Gamer>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Gamer&&(identical(other.name, name) || other.name == name)&&(identical(other.remainingCounts, remainingCounts) || other.remainingCounts == remainingCounts)&&(identical(other.wins, wins) || other.wins == wins)&&const DeepCollectionEquality().equals(other.symbol, symbol));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Gamer&&(identical(other.name, name) || other.name == name)&&(identical(other.remainingCounts, remainingCounts) || other.remainingCounts == remainingCounts)&&(identical(other.wins, wins) || other.wins == wins)&&(identical(other.symbol, symbol) || other.symbol == symbol));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,name,remainingCounts,wins,const DeepCollectionEquality().hash(symbol));
+int get hashCode => Object.hash(runtimeType,name,remainingCounts,wins,symbol);
 
 @override
 String toString() {
@@ -264,12 +264,272 @@ class __$GamerCopyWithImpl<$Res>
 
 /// Create a copy of Gamer
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? remainingCounts = null,Object? wins = null,Object? symbol = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? remainingCounts = null,Object? wins = null,Object? symbol = null,}) {
   return _then(_Gamer(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,remainingCounts: null == remainingCounts ? _self.remainingCounts : remainingCounts // ignore: cast_nullable_to_non_nullable
 as int,wins: null == wins ? _self.wins : wins // ignore: cast_nullable_to_non_nullable
-as int,symbol: freezed == symbol ? _self.symbol : symbol // ignore: cast_nullable_to_non_nullable
+as int,symbol: null == symbol ? _self.symbol : symbol // ignore: cast_nullable_to_non_nullable
+as XorO,
+  ));
+}
+
+
+}
+
+/// @nodoc
+mixin _$GamerCmd {
+
+ String get name; XorO get symbol;
+/// Create a copy of GamerCmd
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$GamerCmdCopyWith<GamerCmd> get copyWith => _$GamerCmdCopyWithImpl<GamerCmd>(this as GamerCmd, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GamerCmd&&(identical(other.name, name) || other.name == name)&&(identical(other.symbol, symbol) || other.symbol == symbol));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,name,symbol);
+
+@override
+String toString() {
+  return 'GamerCmd(name: $name, symbol: $symbol)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $GamerCmdCopyWith<$Res>  {
+  factory $GamerCmdCopyWith(GamerCmd value, $Res Function(GamerCmd) _then) = _$GamerCmdCopyWithImpl;
+@useResult
+$Res call({
+ String name, XorO symbol
+});
+
+
+
+
+}
+/// @nodoc
+class _$GamerCmdCopyWithImpl<$Res>
+    implements $GamerCmdCopyWith<$Res> {
+  _$GamerCmdCopyWithImpl(this._self, this._then);
+
+  final GamerCmd _self;
+  final $Res Function(GamerCmd) _then;
+
+/// Create a copy of GamerCmd
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? symbol = null,}) {
+  return _then(_self.copyWith(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,symbol: null == symbol ? _self.symbol : symbol // ignore: cast_nullable_to_non_nullable
+as XorO,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [GamerCmd].
+extension GamerCmdPatterns on GamerCmd {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _GamerCmd value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _GamerCmd() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _GamerCmd value)  $default,){
+final _that = this;
+switch (_that) {
+case _GamerCmd():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _GamerCmd value)?  $default,){
+final _that = this;
+switch (_that) {
+case _GamerCmd() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  XorO symbol)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _GamerCmd() when $default != null:
+return $default(_that.name,_that.symbol);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  XorO symbol)  $default,) {final _that = this;
+switch (_that) {
+case _GamerCmd():
+return $default(_that.name,_that.symbol);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  XorO symbol)?  $default,) {final _that = this;
+switch (_that) {
+case _GamerCmd() when $default != null:
+return $default(_that.name,_that.symbol);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class _GamerCmd extends GamerCmd {
+  const _GamerCmd({required this.name, required this.symbol}): super._();
+  
+
+@override final  String name;
+@override final  XorO symbol;
+
+/// Create a copy of GamerCmd
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$GamerCmdCopyWith<_GamerCmd> get copyWith => __$GamerCmdCopyWithImpl<_GamerCmd>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GamerCmd&&(identical(other.name, name) || other.name == name)&&(identical(other.symbol, symbol) || other.symbol == symbol));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,name,symbol);
+
+@override
+String toString() {
+  return 'GamerCmd(name: $name, symbol: $symbol)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$GamerCmdCopyWith<$Res> implements $GamerCmdCopyWith<$Res> {
+  factory _$GamerCmdCopyWith(_GamerCmd value, $Res Function(_GamerCmd) _then) = __$GamerCmdCopyWithImpl;
+@override @useResult
+$Res call({
+ String name, XorO symbol
+});
+
+
+
+
+}
+/// @nodoc
+class __$GamerCmdCopyWithImpl<$Res>
+    implements _$GamerCmdCopyWith<$Res> {
+  __$GamerCmdCopyWithImpl(this._self, this._then);
+
+  final _GamerCmd _self;
+  final $Res Function(_GamerCmd) _then;
+
+/// Create a copy of GamerCmd
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? symbol = null,}) {
+  return _then(_GamerCmd(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,symbol: null == symbol ? _self.symbol : symbol // ignore: cast_nullable_to_non_nullable
 as XorO,
   ));
 }
