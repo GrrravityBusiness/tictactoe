@@ -38,12 +38,14 @@ class LobbyController extends Cubit<AsyncValue<LobbyData, void>> {
     );
     mainContestantOrFailure.fold(
       (failure) => emit(state.toFailure(failure)),
-      (player) => emit(
-        state.copyWithData(LobbyData(player: player)).asLoaded!,
-      ),
+      (player) {
+        emit(
+          state.copyWithData(LobbyData(player: player)).asLoaded!,
+        );
+        _getOpponent();
+        getHistories();
+      },
     );
-    _getOpponent();
-    getHistories();
   }
 
   /// retrieve opponent from local storage and emit state update
@@ -85,7 +87,7 @@ class LobbyController extends Cubit<AsyncValue<LobbyData, void>> {
         data.opponent?.copyWith(name: name) ??
         Opponent(
           name: name,
-          symbol: TicTacToeSymbols.X,
+          symbol: TicTacToeSymbols.O,
         );
     emit(state.copyWithData(data.copyWith(opponent: player)));
   }
