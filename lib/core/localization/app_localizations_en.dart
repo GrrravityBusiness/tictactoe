@@ -18,7 +18,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboarding_action_validate_name => 'That\'s my name !';
 
   @override
-  String get onboarding_welcome_title => 'Welcome on TicTacToe';
+  String get onboarding_welcome_title => 'Tic Tac Toe';
 
   @override
   String get onboarding_field_playername_label => 'Player Name';
@@ -39,7 +39,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lobby_field_opponent_label => 'Name';
 
   @override
-  String get lobby_select_opponent_title => 'Name your opponent:';
+  String get lobby_select_opponent_title => 'Who are we fighting?';
 
   @override
   String get lobby_page_error_message => 'An error occurred';
@@ -131,4 +131,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get game_result_vs_text => '🔥 VS 🔥';
+
+  @override
+  String get scoreboard_empty_title => 'Scoreboard is empty for now.';
 }

@@ -32,22 +32,14 @@ class PlayerHUD extends StatelessWidget {
               boxShadow: isActivePlayer
                   ? [
                       BoxShadow(
-                        color: Colors.amberAccent.withValues(alpha: 0.2),
+                        color: theme.colorScheme.primary.withValues(
+                          alpha: 0.25,
+                        ),
                         blurRadius: 16,
                         spreadRadius: 4,
-                        offset: const Offset(0, 20),
+                        offset: const Offset(0, 6),
                       ),
                     ]
-                  : null,
-              gradient: isActivePlayer
-                  ? LinearGradient(
-                      begin: .topCenter,
-                      end: .bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        Colors.amberAccent.withValues(alpha: 0.8),
-                      ],
-                    )
                   : null,
             ),
             child: Column(
@@ -80,7 +72,7 @@ class PlayerHUD extends StatelessWidget {
                         child: CustomPaint(
                           painter: gamer.symbol == XorO.x
                               ? XPainter(color: theme.colorScheme.primary)
-                              : OPainter(color: theme.colorScheme.tertiary),
+                              : OPainter(color: Colors.blue),
                         ),
                       ),
                     ),

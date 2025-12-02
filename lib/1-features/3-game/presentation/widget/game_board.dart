@@ -96,14 +96,14 @@ class _GameBoardState extends State<GameBoard> {
                         }
                       },
                 child: Container(
-                  decoration: theme.brightness == Brightness.dark
-                      ? null
-                      : BoxDecoration(
-                          color: Colors.white.withValues(
-                            alpha: 0.4,
-                          ),
-                          borderRadius: .circular(20),
-                        ),
+                  // decoration: theme.brightness == Brightness.dark
+                  //     ? null
+                  //     : BoxDecoration(
+                  //         color: Colors.white.withValues(
+                  //           alpha: 0.4,
+                  //         ),
+                  //         borderRadius: .circular(20),
+                  //       ),
                   child: TicTacToePainter(
                     board: state.board,
                   ),

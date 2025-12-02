@@ -32,7 +32,7 @@ class ScoreboardButton extends StatelessWidget {
           icon: Icon(
             Icons.scoreboard_outlined,
             size: context.dsTokens.icons.xLarge,
-            color: Colors.orange,
+            color: Colors.blue.withValues(alpha: 0.8),
           ),
           tooltip: l10n.lobby_scoreboard_title,
         );

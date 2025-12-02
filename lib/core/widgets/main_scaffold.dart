@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tictactoe/core/services/theme/presentation/widget/theme_switcher.dart';
 import 'package:tictactoe/core/widgets/dismiss_keyboard.dart';
 
-class GameGradientScaffold extends StatelessWidget {
-  const GameGradientScaffold({
+class MainScaffold extends StatelessWidget {
+  const MainScaffold({
     required this.body,
     super.key,
     this.withThemeSwitcher = true,
@@ -13,28 +13,14 @@ class GameGradientScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    Theme.of(context);
     return DismissKeyboard(
       child: Scaffold(
         floatingActionButton: withThemeSwitcher
             ? const ThemeSwitcherWidget()
             : null,
         floatingActionButtonLocation: .miniEndDocked,
-        body: DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                theme.colorScheme.tertiaryContainer,
-                theme.scaffoldBackgroundColor,
-                theme.scaffoldBackgroundColor,
-                theme.colorScheme.tertiaryContainer,
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-          child: body,
-        ),
+        body: body,
       ),
     );
   }

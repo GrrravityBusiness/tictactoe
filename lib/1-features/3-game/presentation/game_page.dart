@@ -35,36 +35,41 @@ class GamePage extends StatelessWidget {
         child: BlocListener<GameController, GameState>(
           listener: (BuildContext context, GameState state) async {
             if (state.result != null) {
-              final playAgain = await showGeneralDialog<bool>(
-                context: context,
-                barrierLabel: l10n.game_result_dialog_label,
-                transitionDuration: const Duration(milliseconds: 400),
-                pageBuilder: (context, anim1, anim2) {
-                  return const SizedBox.shrink();
-                },
-                transitionBuilder: (context, anim1, anim2, child) {
-                  return FadeTransition(
-                    opacity: anim1,
-                    child: MatchResultModal(
-                      state: state,
-                      onBackToLobby: () {
-                        context.pop(false);
-                      },
-                      onPlayAgain: () {
-                        context.pop(true);
-                      },
-                    ),
-                  );
-                },
+              await Future<void>.delayed(
+                const Duration(seconds: 2),
               );
               if (context.mounted) {
-                if (!(playAgain ?? false)) {
-                  await context.read<GameController>().saveScores();
-                  if (context.mounted) {
-                    context.pop();
+                final playAgain = await showGeneralDialog<bool>(
+                  context: context,
+                  barrierLabel: l10n.game_result_dialog_label,
+                  transitionDuration: const Duration(milliseconds: 400),
+                  pageBuilder: (context, anim1, anim2) {
+                    return const SizedBox.shrink();
+                  },
+                  transitionBuilder: (context, anim1, anim2, child) {
+                    return FadeTransition(
+                      opacity: anim1,
+                      child: MatchResultModal(
+                        state: state,
+                        onBackToLobby: () {
+                          context.pop(false);
+                        },
+                        onPlayAgain: () {
+                          context.pop(true);
+                        },
+                      ),
+                    );
+                  },
+                );
+                if (context.mounted) {
+                  if (!(playAgain ?? false)) {
+                    await context.read<GameController>().saveScores();
+                    if (context.mounted) {
+                      context.pop();
+                    }
+                  } else {
+                    context.read<GameController>().nextGame();
                   }
-                } else {
-                  context.read<GameController>().nextGame();
                 }
               }
             }

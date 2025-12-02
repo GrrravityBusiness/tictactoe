@@ -4,10 +4,12 @@ import 'package:tictactoe/core/utils/game_utils.dart';
 class TicTacToePainter extends StatelessWidget {
   const TicTacToePainter({
     this.board = const [1, -1, -1, -1, 0, -1, -1, -1, 1],
+    this.strokeWidth = 6,
     super.key,
   }) : assert(board.length == 9, 'Board must have exactly 9 elements');
 
   final List<int> board;
+  final double strokeWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -15,17 +17,8 @@ class TicTacToePainter extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.1),
+        color: theme.colorScheme.onTertiaryContainer.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: theme.brightness == Brightness.dark
-                ? Colors.white12
-                : Colors.black12,
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
       child: AspectRatio(
         aspectRatio: 1,
@@ -33,8 +26,9 @@ class TicTacToePainter extends StatelessWidget {
           painter: _TicTacToeBoardPainter(
             board: board,
             xColor: theme.colorScheme.primary,
-            oColor: theme.colorScheme.tertiary,
+            oColor: Colors.blue,
             winLineColor: theme.colorScheme.error,
+            strokeWidth: strokeWidth,
           ),
           child: Container(),
         ),
@@ -50,6 +44,7 @@ class _TicTacToeBoardPainter extends CustomPainter {
     required this.oColor,
     required this.xColor,
     required this.winLineColor,
+    this.strokeWidth = 6,
   });
 
   final List<int> board;
@@ -57,12 +52,14 @@ class _TicTacToeBoardPainter extends CustomPainter {
   final Color oColor;
   final Color xColor;
   final Color winLineColor;
+  final double strokeWidth;
 
   @override
   void paint(Canvas canvas, Size size) {
     final gridPaint = Paint()
       ..color = Colors.white
-      ..strokeWidth = 6
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
     final cellSize = size.width / 3;
@@ -78,13 +75,15 @@ class _TicTacToeBoardPainter extends CustomPainter {
     // Draw some stylized X
     final xPaint = Paint()
       ..color = xColor
-      ..strokeWidth = 7
+      ..strokeWidth = strokeWidth + 1
+      ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
     // Draw some stylized O
     final oPaint = Paint()
       ..color = oColor
-      ..strokeWidth = 7
+      ..strokeWidth = 1 + strokeWidth
+      ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
     for (var i = 0; i < board.length; i++) {

@@ -29,13 +29,17 @@ class LobbyHeader extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
+        const SizedBox(height: 16),
         Container(
           height: 200,
           padding: EdgeInsets.all(
             context.dsTokens.spacing.large,
           ),
-          child: TicTacToePainter(),
+          child: TicTacToePainter(
+            strokeWidth: 4,
+          ),
         ),
+        const SizedBox(height: 16),
       ],
     );
   }

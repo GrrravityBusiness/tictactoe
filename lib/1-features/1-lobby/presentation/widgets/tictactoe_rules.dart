@@ -19,8 +19,11 @@ class TicTacToeRulesModal extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             PinnedHeaderSliver(
-              child: ColoredBox(
+              child: Container(
                 color: theme.colorScheme.surfaceContainerHigh,
+                padding: EdgeInsets.only(
+                  bottom: context.dsTokens.spacing.medium,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -46,7 +49,7 @@ class TicTacToeRulesModal extends StatelessWidget {
                 children: [
                   RichText(
                     text: TextSpan(
-                      style: theme.textTheme.bodyMedium,
+                      style: theme.primaryTextTheme.bodyLarge,
                       children: [
                         TextSpan(
                           text: l10n.rule_one,
@@ -65,7 +68,7 @@ class TicTacToeRulesModal extends StatelessWidget {
                           text: l10n.tictactoe_o,
                           style: theme.textTheme.headlineMedium!.copyWith(
                             fontWeight: FontWeight.w900,
-                            color: theme.colorScheme.tertiary,
+                            color: Colors.blue,
                             fontFamily: 'Roboto',
                           ),
                         ),
@@ -79,8 +82,9 @@ class TicTacToeRulesModal extends StatelessWidget {
                   const SizedBox(height: 24),
                   Text(
                     l10n.rule_cases_example,
-                    style: theme.textTheme.headlineMedium!.copyWith(
+                    style: theme.primaryTextTheme.headlineMedium!.copyWith(
                       fontWeight: FontWeight.w600,
+                      color: Colors.white.withValues(alpha: 0.7),
                     ),
                   ),
                   SizedBox(height: dsTokens.spacing.large),
@@ -136,7 +140,9 @@ class _ExampleBoard extends StatelessWidget {
           padding: EdgeInsets.only(left: dsTokens.spacing.medium),
           child: Text(
             caption,
-            style: theme.textTheme.displaySmall,
+            style: theme.primaryTextTheme.displaySmall!.copyWith(
+              color: Colors.white.withValues(alpha: 0.7),
+            ),
           ),
         ),
         Container(
@@ -146,6 +152,7 @@ class _ExampleBoard extends StatelessWidget {
           ),
           child: TicTacToePainter(
             board: board,
+            strokeWidth: 4,
           ),
         ),
       ],

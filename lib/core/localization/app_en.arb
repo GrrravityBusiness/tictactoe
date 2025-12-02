@@ -2,7 +2,7 @@
   "nav_go_to_onboarding": "Change my name",
   "onboarding_step_add_name": "Start by creating your player name",
   "onboarding_action_validate_name": "That's my name !",
-  "onboarding_welcome_title": "Welcome on TicTacToe",
+  "onboarding_welcome_title": "Tic Tac Toe",
   "onboarding_field_playername_label": "Player Name",
   "theme_action_toggle": "Toggle Theme",
   "onboarding_prevent_close_title": "You have to set yourself a name before leaving!",
@@ -15,7 +15,7 @@
     }
   },
   "lobby_field_opponent_label": "Name",
-  "lobby_select_opponent_title": "Name your opponent:",
+  "lobby_select_opponent_title": "Who are we fighting?",
   "lobby_page_error_message": "An error occurred",
   "tictactoe_x": "X",
   "tictactoe_o": "O",
@@ -57,5 +57,6 @@
       }
     }
   },
-  "game_result_vs_text": "🔥 VS 🔥"
+  "game_result_vs_text": "🔥 VS 🔥",
+  "scoreboard_empty_title": "Scoreboard is empty for now."
 }

@@ -6,7 +6,7 @@ import 'package:tictactoe/1-features/0-onboarding/presentation/widget/player_for
 import 'package:tictactoe/1-features/0-onboarding/presentation/widget/title_header.dart';
 import 'package:tictactoe/1-features/0-onboarding/presentation/widget/validate_onboarding_button.dart';
 import 'package:tictactoe/core/localization/app_localizations.dart';
-import 'package:tictactoe/core/widgets/gradiant_scaffold.dart';
+import 'package:tictactoe/core/widgets/main_scaffold.dart';
 import 'package:tictactoe/core/widgets/snackbar.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -28,7 +28,7 @@ class OnboardingPage extends StatelessWidget {
           title: l10n.onboarding_prevent_close_title,
         );
       },
-      child: GradientScaffold(
+      child: MainScaffold(
         body: CustomScrollView(
           slivers: [
             SliverFillRemaining(
