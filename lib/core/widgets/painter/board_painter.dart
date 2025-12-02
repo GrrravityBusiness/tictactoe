@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-/// Custom painter for a stylized Tic Tac Toe board with X and O.
+/// Custom painter for a stylized Tic Tac Toe board.
+///
+/// Will basically draw the grid.
 class TicTacToeBoardPainter extends CustomPainter {
   TicTacToeBoardPainter({
     this.strokeWidth = 6,

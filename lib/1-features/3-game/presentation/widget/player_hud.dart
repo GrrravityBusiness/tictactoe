@@ -88,16 +88,16 @@ class _RemainingCountsRowState extends State<_RemainingCountsRow> {
 
   @override
   void initState() {
-    final count = widget.isMainGamer
-        ? context.read<GameController>().state.player1.remainingCounts
-        : context.read<GameController>().state.player2.remainingCounts;
-    final symbol = widget.isMainGamer
-        ? context.read<GameController>().state.player1.symbol
-        : context.read<GameController>().state.player2.symbol;
+    final player = widget.isMainGamer
+        ? context.read<GameController>().state.player1
+        : context.read<GameController>().state.player2;
+    final count = player.remainingCounts;
+    final symbol = player.symbol;
     _counts.addAll(List.filled(count, symbol));
     super.initState();
   }
 
+  // Note : Remove one count from the remaining counts list with animation
   void _removeCount() {
     final removedItem = _counts.last;
     final index = _counts.length - 1;
@@ -111,6 +111,7 @@ class _RemainingCountsRowState extends State<_RemainingCountsRow> {
     _counts.removeLast();
   }
 
+  // Note : Reset the remaining counts list with animation
   void _reset(int count, XorO symbol) {
     for (var i = _counts.length - 1; i >= 0; i--) {
       _listKey.currentState?.removeItem(
@@ -128,6 +129,8 @@ class _RemainingCountsRowState extends State<_RemainingCountsRow> {
     );
   }
 
+  // Build method as we are using it in an animated list and Key's context
+  // will be manipulated by the stateful widget.
   Widget _buildItem(XorO item, int index, Animation<double> animation) {
     return ScaleTransition(
       scale: animation,
@@ -152,6 +155,9 @@ class _RemainingCountsRowState extends State<_RemainingCountsRow> {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
+        // Note : Listen to remaining counts changes to update the list.
+        // As the controller does not add any counts, we listen to any changes
+        // and use removeCount to update the list accordingly.
         BlocListener<GameController, GameState>(
           listener: (context, state) => _removeCount(),
           listenWhen: (previous, current) {
@@ -164,6 +170,9 @@ class _RemainingCountsRowState extends State<_RemainingCountsRow> {
             return gamer.remainingCounts != previousGamer.remainingCounts;
           },
         ),
+        // Note: Listen to changes in symbol as it's triggered when
+        // restarting a new game. We reset the list accordingly to give
+        // players their counts and their new symbol.
         BlocListener<GameController, GameState>(
           listener: (context, state) => _reset(
             widget.isMainGamer

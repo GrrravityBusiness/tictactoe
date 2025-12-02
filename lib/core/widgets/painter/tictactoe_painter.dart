@@ -4,6 +4,13 @@ import 'package:tictactoe/core/widgets/painter/board_painter.dart';
 import 'package:tictactoe/core/widgets/painter/winner_line_painter.dart';
 import 'package:tictactoe/core/widgets/painter/x_o_painters.dart';
 
+/// Handle a full Tictactoe board painting with X and O elements and
+/// winning line if any. is triggered.
+///
+/// It's also animating the painters for extra polish.
+///
+/// [board] has a default value representing a sample board. with X and O
+/// elements already placed diagonally.
 class TicTacToePaintWrapper extends StatelessWidget {
   const TicTacToePaintWrapper({
     this.board = const [1, -1, -1, -1, 0, -1, -1, -1, 1],

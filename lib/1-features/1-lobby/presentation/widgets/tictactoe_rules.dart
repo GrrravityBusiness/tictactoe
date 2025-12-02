@@ -51,9 +51,7 @@ class TicTacToeRulesModal extends StatelessWidget {
                     text: TextSpan(
                       style: theme.primaryTextTheme.bodyLarge,
                       children: [
-                        TextSpan(
-                          text: l10n.rule_one,
-                        ),
+                        TextSpan(text: l10n.rule_one),
                         TextSpan(text: l10n.rule_two_1),
                         TextSpan(
                           text: l10n.tictactoe_x,
@@ -88,6 +86,7 @@ class TicTacToeRulesModal extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: dsTokens.spacing.large),
+                  // Note: Example with predefined boards to illustrate rules
                   _ExampleBoard(
                     board: const [1, 1, 1, 0, -1, 0, -1, -1, -1],
                     caption: l10n.rule_horizontal_x_win,

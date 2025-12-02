@@ -19,6 +19,8 @@ class ScoreboardButton extends StatelessWidget {
       builder: (context, state) {
         return IconButton(
           onPressed: () async {
+            // Note: Refresh histories before opening the modal to get them
+            // up to date.
             context.read<LobbyController>().getHistories();
             final histoties =
                 context.read<LobbyController>().state.data?.history ?? [];

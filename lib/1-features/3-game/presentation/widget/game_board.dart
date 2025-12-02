@@ -20,6 +20,9 @@ class _GameBoardState extends State<GameBoard> {
 
   @override
   void initState() {
+    // Note : remove status bar at the top for a more immersive experience
+    // also because the second player is "upside down" from device perspective.
+    // Unawaiting it as it does not need to block the UI.
     unawaited(
       SystemChrome.setEnabledSystemUIMode(
         SystemUiMode.manual,
@@ -31,6 +34,9 @@ class _GameBoardState extends State<GameBoard> {
 
   @override
   void dispose() {
+    // Note : restore status bar when leaving the game page as main player
+    // should get back his phone in normal perpective
+    // Unawaiting it as it does not need to block the UI.
     unawaited(
       SystemChrome.setEnabledSystemUIMode(
         SystemUiMode.manual,
@@ -40,6 +46,7 @@ class _GameBoardState extends State<GameBoard> {
     super.dispose();
   }
 
+  // Note : prevent multiple taps while processing a move
   void toggleLoad() {
     setState(() {
       loading = !loading;
@@ -51,6 +58,10 @@ class _GameBoardState extends State<GameBoard> {
     double maxWidth,
     XorO currentSign,
   ) {
+    // Note: Calculate tapped cell based on local position using clamp
+    // as local position divided with cellSize will return the right index
+    // We truncate the division result (~/ operator)
+    // as it's enough for our usecase.
     final cellSize = maxWidth / 3;
     final col = (localPosition.dx ~/ cellSize).clamp(0, 2);
     final row = (localPosition.dy ~/ cellSize).clamp(0, 2);

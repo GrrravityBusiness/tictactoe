@@ -16,6 +16,9 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+
+    // Note: Prevent closing the onboarding page if the player name is not valid
+    // to avoid closing the app.
     return PopScope(
       canPop: context.select<PlayerController, bool>(
         (controller) =>

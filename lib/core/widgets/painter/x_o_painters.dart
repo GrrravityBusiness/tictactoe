@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+/// Self animating widget to draw [XPainter] or [OPainter]
+/// based on the [xOrO] value.
+///
+/// -1 : nothing
+/// 1 : X
+/// 0 : O
+///
+/// [strokeWidth] defines the stroke width of the painters.
 class XorOAnimatedPaint extends StatelessWidget {
   const XorOAnimatedPaint({
     required this.xOrO,

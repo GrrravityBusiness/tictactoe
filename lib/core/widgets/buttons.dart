@@ -33,8 +33,7 @@ class SimpleTextButton extends StatelessWidget {
   }) => SimpleTextButton(
     text: text,
     onPressed: onPressed,
-    style: SimpleTextButtonStyle
-        .transparent, // You may want to add a new style for transparent
+    style: SimpleTextButtonStyle.transparent,
   );
 
   factory SimpleTextButton.danger({

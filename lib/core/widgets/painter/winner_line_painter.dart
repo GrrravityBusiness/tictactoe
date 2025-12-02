@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tictactoe/core/utils/game_utils.dart';
 
-/// Custom painter for a stylized Tic Tac Toe board with X and O.
+/// Custom painter for a stylized winner line in Tic Tac Toe.
+///
+/// It will draw a line over the winning pattern when applicable.
+///
+/// A winning pattern is either a horizontal, vertical, or diagonal line
+/// of the same symbol (X or O) on the Tic Tac Toe board.
 class TicTacToeWinLinePainter extends CustomPainter {
   TicTacToeWinLinePainter({
     required this.board,
