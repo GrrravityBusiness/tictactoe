@@ -159,7 +159,9 @@ class _RemainingCountsRowState extends State<_RemainingCountsRow> {
         // As the controller does not add any counts, we listen to any changes
         // and use removeCount to update the list accordingly.
         BlocListener<GameController, GameState>(
-          listener: (context, state) => _removeCount(),
+          listener: (context, state) {
+            _removeCount();
+          },
           listenWhen: (previous, current) {
             final gamer = widget.isMainGamer
                 ? current.player1
@@ -167,7 +169,8 @@ class _RemainingCountsRowState extends State<_RemainingCountsRow> {
             final previousGamer = widget.isMainGamer
                 ? previous.player1
                 : previous.player2;
-            return gamer.remainingCounts != previousGamer.remainingCounts;
+            return gamer.remainingCounts != previousGamer.remainingCounts &&
+                gamer.symbol == previousGamer.symbol;
           },
         ),
         // Note: Listen to changes in symbol as it's triggered when
