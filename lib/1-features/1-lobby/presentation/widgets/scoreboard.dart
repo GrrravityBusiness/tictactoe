@@ -33,8 +33,8 @@ class ScoreBoardModal extends StatelessWidget {
                 hasScrollBody: false,
                 child: Center(
                   child: Text(
-                    'Scoreboard is empty for now.',
-                    style: theme.textTheme.bodyLarge,
+                    l10n.scoreboard_empty_title,
+                    style: theme.primaryTextTheme.bodyLarge,
                   ),
                 ),
               )
@@ -46,12 +46,15 @@ class ScoreBoardModal extends StatelessWidget {
                   final opponentPoints = score.opponentScore.points;
                   final isPlayerWinner = playerPoints > opponentPoints;
                   final isDraw = playerPoints == opponentPoints;
-                  return _ScoreLine(
-                    isPlayerWinner: isPlayerWinner,
-                    isDraw: isDraw,
-                    score: score,
-                    l10n: l10n,
-                    theme: theme,
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: _ScoreLine(
+                      isPlayerWinner: isPlayerWinner,
+                      isDraw: isDraw,
+                      score: score,
+                      l10n: l10n,
+                      theme: theme,
+                    ),
                   );
                 },
                 itemCount: histories.length,
@@ -111,8 +114,8 @@ class _ScoreLine extends StatelessWidget {
             ),
             _ContestantText(
               score: score.opponentScore,
-              isWinner: !isPlayerWinner,
-              isLooser: !isPlayerWinner && !isDraw,
+              isWinner: !isPlayerWinner && !isDraw,
+              isLooser: isPlayerWinner && !isDraw,
             ),
           ],
         ),
@@ -128,8 +131,11 @@ class _ScoreboardHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
-    return ColoredBox(
+    return Container(
       color: theme.colorScheme.surfaceContainerHigh,
+      padding: EdgeInsets.only(
+        bottom: context.dsTokens.spacing.medium,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -137,10 +143,14 @@ class _ScoreboardHeader extends StatelessWidget {
             l10n.lobby_scoreboard_title,
             style: theme.textTheme.headlineLarge!.copyWith(
               fontWeight: FontWeight.bold,
+              color: theme.colorScheme.primary,
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.close),
+            icon: Icon(
+              Icons.close,
+              color: theme.colorScheme.primary,
+            ),
             onPressed: () => context.pop(),
           ),
         ],
@@ -167,19 +177,22 @@ class _ScoreGradientContainer extends StatelessWidget {
         gradient: isDraw
             ? LinearGradient(
                 colors: [
-                  theme.colorScheme.surfaceContainerHighest.withValues(
-                    alpha: 0.5,
+                  theme.colorScheme.onPrimary.withValues(
+                    alpha: 0.25,
                   ),
-                  theme.colorScheme.surfaceContainerHighest.withValues(
-                    alpha: 0.5,
+                  theme.colorScheme.onPrimary.withValues(
+                    alpha: 0.25,
                   ),
                 ],
               )
             : (isPlayerWinner
                   ? LinearGradient(
                       colors: [
-                        theme.colorScheme.primary.withValues(
-                          alpha: 0.18,
+                        theme.colorScheme.onPrimary.withValues(
+                          alpha: 0.25,
+                        ),
+                        theme.colorScheme.onPrimary.withValues(
+                          alpha: 0.25,
                         ),
                         Colors.transparent,
                       ],
@@ -187,8 +200,11 @@ class _ScoreGradientContainer extends StatelessWidget {
                   : LinearGradient(
                       colors: [
                         Colors.transparent,
-                        theme.colorScheme.onSurface.withValues(
-                          alpha: 0.18,
+                        theme.colorScheme.onPrimary.withValues(
+                          alpha: 0.25,
+                        ),
+                        theme.colorScheme.onPrimary.withValues(
+                          alpha: 0.25,
                         ),
                       ],
                     )),
@@ -219,7 +235,7 @@ class _ContestantText extends StatelessWidget {
       child: Text(
         '${score.contestant.name} (${score.points})',
         style: theme.textTheme.bodyLarge!.copyWith(
-          fontWeight: FontWeight.bold,
+          fontWeight: isLooser ? FontWeight.normal : FontWeight.bold,
           color: isWinner
               ? theme.colorScheme.primary
               : isLooser

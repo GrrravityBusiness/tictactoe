@@ -15,9 +15,10 @@ import 'package:tictactoe/1-features/1-lobby/presentation/widgets/start_game_but
 import 'package:tictactoe/core/localization/app_localizations.dart';
 import 'package:tictactoe/core/services/dependency_injection/dependency_injection.dart';
 import 'package:tictactoe/core/services/theme/domain/entities/theme_ext.dart';
+import 'package:tictactoe/core/services/theme/presentation/widget/theme_switcher.dart';
 import 'package:tictactoe/core/utils/async_value.dart';
-import 'package:tictactoe/core/widgets/gradiant_scaffold.dart';
 import 'package:tictactoe/core/widgets/loader.dart';
+import 'package:tictactoe/core/widgets/main_scaffold.dart';
 
 class LobbyPage extends StatelessWidget {
   const LobbyPage({super.key});
@@ -29,7 +30,7 @@ class LobbyPage extends StatelessWidget {
         context.read<PlayerController>().state.player?.name ?? '';
     return PopScope(
       canPop: false,
-      child: GradientScaffold(
+      child: MainScaffold(
         body: BlocProvider<LobbyController>(
           create: (context) {
             return LobbyController(
@@ -43,9 +44,12 @@ class LobbyPage extends StatelessWidget {
               const SliverToBoxAdapter(
                 child: SafeArea(
                   bottom: false,
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: ScoreboardButton(),
+                  child: Row(
+                    mainAxisAlignment: .spaceBetween,
+                    children: [
+                      ThemeSwitcherWidget(),
+                      ScoreboardButton(),
+                    ],
                   ),
                 ),
               ),

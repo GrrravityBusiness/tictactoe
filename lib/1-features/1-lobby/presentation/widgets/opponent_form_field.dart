@@ -51,6 +51,8 @@ class _PlayerTextFieldState extends State<_PlayerTextField> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    // Note : Listen state changes to update the text field controller
+    // when opponent changes.
     return BlocListener<LobbyController, AsyncValue<LobbyData, void>>(
       listener: (context, state) {
         if (state.data?.opponent == null) {

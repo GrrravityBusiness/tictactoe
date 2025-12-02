@@ -29,6 +29,23 @@ class GameUtils {
     return null;
   }
 
+  static WinningPatternType? getWinningPatternType(
+    List<int> board,
+    int winningCandidate,
+  ) {
+    final winningPattern = getWinningPattern(board, winningCandidate);
+    if (winningPattern == null) {
+      return null;
+    }
+    if (winningPattern[0] ~/ 3 == winningPattern[1] ~/ 3) {
+      return WinningPatternType.row;
+    } else if (winningPattern[0] % 3 == winningPattern[1] % 3) {
+      return WinningPatternType.column;
+    } else {
+      return WinningPatternType.diagonal;
+    }
+  }
+
   /// Checks if the board is full (no empty cells).
   static bool isBoardFull(List<int> board) {
     return board.every((cell) => cell != -1);
@@ -64,4 +81,10 @@ enum XorO {
   const XorO(this.symbolValue, this.displayValue);
   final int symbolValue;
   final String displayValue;
+}
+
+enum WinningPatternType {
+  row,
+  column,
+  diagonal,
 }

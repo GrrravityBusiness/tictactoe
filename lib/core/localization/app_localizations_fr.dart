@@ -9,7 +9,7 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
-  String get nav_go_to_onboarding => 'Changer de nom';
+  String get nav_go_to_onboarding => 'Changer mon nom';
 
   @override
   String get onboarding_step_add_name => 'Commence par créer ton nom';
@@ -18,7 +18,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get onboarding_action_validate_name => 'C\'est bien moi !';
 
   @override
-  String get onboarding_welcome_title => 'Bienvenue sur TicTacToe';
+  String get onboarding_welcome_title => 'Tic Tac Toe';
 
   @override
   String get onboarding_field_playername_label => 'Nom de joueur';
@@ -36,10 +36,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get lobby_field_opponent_label => 'Nom';
+  String get lobby_field_opponent_label => 'Nom de l\'adversaire';
 
   @override
-  String get lobby_select_opponent_title => 'Nomme ton adversaire : ';
+  String get lobby_select_opponent_title => 'Qui combattons nous: ';
 
   @override
   String get lobby_page_error_message => 'Une erreur s\'est produite';
@@ -93,7 +93,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get rule_draw => 'Match nul (aucun gagnant)';
 
   @override
-  String get lobby_see_rules => 'Voir les règles du jeu';
+  String get lobby_see_rules => 'Les règles';
 
   @override
   String get lobby_start_game => 'Démarrer la partie !';
@@ -131,4 +131,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get game_result_vs_text => '🔥 VS 🔥';
+
+  @override
+  String get scoreboard_empty_title => 'Scoreboard is empty for now.';
 }

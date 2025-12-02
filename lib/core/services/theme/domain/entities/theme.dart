@@ -10,10 +10,14 @@ abstract class AppTheme {
   const AppTheme({
     required this.dsTokens,
     required this.colorScheme,
+    required this.textTheme,
+    required this.primaryTextTheme,
   });
 
   final DSTokens dsTokens;
   final ColorScheme colorScheme;
+  final TextTheme textTheme;
+  final TextTheme primaryTextTheme;
 
   ThemeData get baseTheme;
 }
@@ -26,6 +30,8 @@ class LightTheme extends AppTheme with AppThemeMixin {
       typography: ThemeTypography(),
       icons: ThemeIcon(),
     ),
+    super.textTheme = ThemeTypography.lightTheme,
+    super.primaryTextTheme = ThemeTypography.dartTheme,
     super.colorScheme = const ColorScheme(
       brightness: Brightness.light,
       primary: LightThemeColor.primary,
@@ -85,6 +91,8 @@ class DarkTheme extends AppTheme with AppThemeMixin {
       typography: ThemeTypography(),
       icons: ThemeIcon(),
     ),
+    super.textTheme = ThemeTypography.dartTheme,
+    super.primaryTextTheme = ThemeTypography.lightTheme,
     super.colorScheme = const ColorScheme(
       brightness: Brightness.dark,
       primary: DarkThemeColor.primary,
@@ -142,7 +150,8 @@ mixin AppThemeMixin on AppTheme {
     colorScheme: colorScheme,
     scaffoldBackgroundColor: colorScheme.surface,
     fontFamily: ThemeTypography.baseFontFamilly,
-    textTheme: ThemeTypography.textTheme,
+    textTheme: textTheme,
+    primaryTextTheme: primaryTextTheme,
     extensions: <ThemeExtension<dynamic>>[
       dsTokens,
     ],

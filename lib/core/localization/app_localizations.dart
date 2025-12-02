@@ -101,7 +101,7 @@ abstract class AppLocalizations {
   /// No description provided for @nav_go_to_onboarding.
   ///
   /// In fr, this message translates to:
-  /// **'Changer de nom'**
+  /// **'Changer mon nom'**
   String get nav_go_to_onboarding;
 
   /// No description provided for @onboarding_step_add_name.
@@ -119,7 +119,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboarding_welcome_title.
   ///
   /// In fr, this message translates to:
-  /// **'Bienvenue sur TicTacToe'**
+  /// **'Tic Tac Toe'**
   String get onboarding_welcome_title;
 
   /// No description provided for @onboarding_field_playername_label.
@@ -149,13 +149,13 @@ abstract class AppLocalizations {
   /// No description provided for @lobby_field_opponent_label.
   ///
   /// In fr, this message translates to:
-  /// **'Nom'**
+  /// **'Nom de l\'adversaire'**
   String get lobby_field_opponent_label;
 
   /// No description provided for @lobby_select_opponent_title.
   ///
   /// In fr, this message translates to:
-  /// **'Nomme ton adversaire : '**
+  /// **'Qui combattons nous: '**
   String get lobby_select_opponent_title;
 
   /// No description provided for @lobby_page_error_message.
@@ -257,7 +257,7 @@ abstract class AppLocalizations {
   /// No description provided for @lobby_see_rules.
   ///
   /// In fr, this message translates to:
-  /// **'Voir les règles du jeu'**
+  /// **'Les règles'**
   String get lobby_see_rules;
 
   /// No description provided for @lobby_start_game.
@@ -325,6 +325,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'🔥 VS 🔥'**
   String get game_result_vs_text;
+
+  /// No description provided for @scoreboard_empty_title.
+  ///
+  /// In fr, this message translates to:
+  /// **'Scoreboard is empty for now.'**
+  String get scoreboard_empty_title;
 }
 
 class _AppLocalizationsDelegate

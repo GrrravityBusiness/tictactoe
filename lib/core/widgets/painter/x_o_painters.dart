@@ -1,5 +1,65 @@
 import 'package:flutter/material.dart';
 
+/// Self animating widget to draw [XPainter] or [OPainter]
+/// based on the [xOrO] value.
+///
+/// -1 : nothing
+/// 1 : X
+/// 0 : O
+///
+/// [strokeWidth] defines the stroke width of the painters.
+class XorOAnimatedPaint extends StatelessWidget {
+  const XorOAnimatedPaint({
+    required this.xOrO,
+    required this.strokeWidth,
+    super.key,
+  });
+
+  final int xOrO;
+  final double strokeWidth;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Visibility(
+      visible: xOrO != -1,
+
+      maintainAnimation: true,
+      maintainState: true,
+      child: AnimatedRotation(
+        turns: xOrO != -1 ? 0 : -0.06,
+        duration: const Duration(milliseconds: 550),
+        curve: Curves.easeInOutBack,
+        child: AnimatedScale(
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.bounceIn,
+          scale: xOrO != -1 ? 1 : 0,
+          child: AnimatedOpacity(
+            duration: const Duration(milliseconds: 550),
+            curve: Curves.bounceIn,
+            opacity: xOrO != -1 ? 1 : 0,
+            child: xOrO == -1
+                ? const SizedBox.shrink()
+                : xOrO == 1
+                ? CustomPaint(
+                    painter: XPainter(
+                      color: theme.colorScheme.primary,
+                      strokeWidth: strokeWidth,
+                    ),
+                  )
+                : CustomPaint(
+                    painter: OPainter(
+                      color: Colors.blue,
+                      strokeWidth: strokeWidth,
+                    ),
+                  ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 /// Custom painter for drawing an X symbol.
 class XPainter extends CustomPainter {
   XPainter({
@@ -16,6 +76,7 @@ class XPainter extends CustomPainter {
     final paint = Paint()
       ..color = color
       ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
     final padding = size.width * paddingFraction;
@@ -56,6 +117,7 @@ class OPainter extends CustomPainter {
     final paint = Paint()
       ..color = color
       ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
     final padding = size.width * paddingFraction;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tictactoe/core/localization/app_localizations.dart';
 import 'package:tictactoe/core/services/theme/domain/entities/theme_ext.dart';
-import 'package:tictactoe/core/widgets/tictactoe_painter.dart';
+import 'package:tictactoe/core/widgets/painter/tictactoe_painter.dart';
 
 class LobbyHeader extends StatelessWidget {
   const LobbyHeader({
@@ -29,13 +29,17 @@ class LobbyHeader extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
+        const SizedBox(height: 16),
         Container(
           height: 200,
           padding: EdgeInsets.all(
             context.dsTokens.spacing.large,
           ),
-          child: TicTacToePainter(),
+          child: TicTacToePaintWrapper(
+            strokeWidth: 4,
+          ),
         ),
+        const SizedBox(height: 16),
       ],
     );
   }

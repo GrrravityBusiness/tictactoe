@@ -6,7 +6,8 @@ import 'package:tictactoe/1-features/0-onboarding/presentation/widget/player_for
 import 'package:tictactoe/1-features/0-onboarding/presentation/widget/title_header.dart';
 import 'package:tictactoe/1-features/0-onboarding/presentation/widget/validate_onboarding_button.dart';
 import 'package:tictactoe/core/localization/app_localizations.dart';
-import 'package:tictactoe/core/widgets/gradiant_scaffold.dart';
+import 'package:tictactoe/core/services/theme/presentation/widget/theme_switcher.dart';
+import 'package:tictactoe/core/widgets/main_scaffold.dart';
 import 'package:tictactoe/core/widgets/snackbar.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -15,6 +16,9 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+
+    // Note: Prevent closing the onboarding page if the player name is not valid
+    // to avoid closing the app.
     return PopScope(
       canPop: context.select<PlayerController, bool>(
         (controller) =>
@@ -28,9 +32,18 @@ class OnboardingPage extends StatelessWidget {
           title: l10n.onboarding_prevent_close_title,
         );
       },
-      child: GradientScaffold(
+      child: MainScaffold(
         body: CustomScrollView(
           slivers: [
+            const SliverToBoxAdapter(
+              child: SafeArea(
+                bottom: false,
+                child: Align(
+                  alignment: .centerLeft,
+                  child: ThemeSwitcherWidget(),
+                ),
+              ),
+            ),
             SliverFillRemaining(
               hasScrollBody: false,
               child: SafeArea(
@@ -43,9 +56,9 @@ class OnboardingPage extends StatelessWidget {
                     children: [
                       const SizedBox(height: 16),
                       const TitleHeader(),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 16),
                       Text(l10n.onboarding_step_add_name),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 16),
                       const PlayerForm(),
                       const SizedBox(height: 24),
                       const ValidateOnboardingButton(),

@@ -33,8 +33,7 @@ class SimpleTextButton extends StatelessWidget {
   }) => SimpleTextButton(
     text: text,
     onPressed: onPressed,
-    style: SimpleTextButtonStyle
-        .transparent, // You may want to add a new style for transparent
+    style: SimpleTextButtonStyle.transparent,
   );
 
   factory SimpleTextButton.danger({
@@ -55,15 +54,22 @@ class SimpleTextButton extends StatelessWidget {
     switch (style) {
       case SimpleTextButtonStyle.primary:
         return TextButton.styleFrom(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadiusGeometry.all(
+              Radius.circular(18),
+            ),
+          ),
+          minimumSize: const Size(50, 40),
           foregroundColor: isEnabled
-              ? Colors.white
-              : Colors.white.withValues(alpha: 0.5),
+              ? theme.colorScheme.secondaryContainer
+              : theme.colorScheme.secondaryContainer.withValues(alpha: 0.5),
           backgroundColor: isEnabled
-              ? theme.primaryColor
-              : theme.primaryColor.withValues(alpha: 0.5),
+              ? theme.colorScheme.onTertiaryContainer
+              : theme.colorScheme.onTertiaryContainer.withValues(alpha: 0.2),
         );
       case SimpleTextButtonStyle.secondary:
         return TextButton.styleFrom(
+          minimumSize: const Size(50, 40),
           foregroundColor: isEnabled
               ? theme.primaryColor
               : theme.primaryColor.withValues(alpha: 0.5),
@@ -71,15 +77,26 @@ class SimpleTextButton extends StatelessWidget {
               ? Colors.white
               : Colors.white.withValues(alpha: 0.5),
           side: BorderSide(color: theme.primaryColor),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadiusGeometry.all(
+              Radius.circular(18),
+            ),
+          ),
         );
       case SimpleTextButtonStyle.danger:
         return TextButton.styleFrom(
+          minimumSize: const Size(50, 40),
           foregroundColor: isEnabled
               ? Colors.white
               : Colors.white.withValues(alpha: 0.5),
           backgroundColor: isEnabled
               ? Colors.red
               : Colors.red.withValues(alpha: 0.5),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadiusGeometry.all(
+              Radius.circular(18),
+            ),
+          ),
         );
       case SimpleTextButtonStyle.transparent:
         return TextButton.styleFrom(

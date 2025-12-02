@@ -23,6 +23,8 @@ class StartGameButton extends StatelessWidget {
               ? () async {
                   await context.read<LobbyController>().saveOpponent();
                   if (context.mounted) {
+                    // Note: Navigate to the game page using
+                    // query parameters to pass player names.
                     context.goNamed(
                       AppRoutes.game,
                       queryParameters: {

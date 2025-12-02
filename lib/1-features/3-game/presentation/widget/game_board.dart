@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/1-features/3-game/presentation/cubit/game_cubit.dart';
 import 'package:tictactoe/1-features/3-game/presentation/cubit/game_state.dart';
 import 'package:tictactoe/core/utils/game_utils.dart';
-import 'package:tictactoe/core/widgets/tictactoe_painter.dart';
+import 'package:tictactoe/core/widgets/painter/tictactoe_painter.dart';
 
 class GameBoard extends StatefulWidget {
   const GameBoard({super.key});
@@ -20,6 +20,9 @@ class _GameBoardState extends State<GameBoard> {
 
   @override
   void initState() {
+    // Note : remove status bar at the top for a more immersive experience
+    // also because the second player is "upside down" from device perspective.
+    // Unawaiting it as it does not need to block the UI.
     unawaited(
       SystemChrome.setEnabledSystemUIMode(
         SystemUiMode.manual,
@@ -31,6 +34,9 @@ class _GameBoardState extends State<GameBoard> {
 
   @override
   void dispose() {
+    // Note : restore status bar when leaving the game page as main player
+    // should get back his phone in normal perpective
+    // Unawaiting it as it does not need to block the UI.
     unawaited(
       SystemChrome.setEnabledSystemUIMode(
         SystemUiMode.manual,
@@ -40,6 +46,7 @@ class _GameBoardState extends State<GameBoard> {
     super.dispose();
   }
 
+  // Note : prevent multiple taps while processing a move
   void toggleLoad() {
     setState(() {
       loading = !loading;
@@ -51,6 +58,10 @@ class _GameBoardState extends State<GameBoard> {
     double maxWidth,
     XorO currentSign,
   ) {
+    // Note: Calculate tapped cell based on local position using clamp
+    // as local position divided with cellSize will return the right index
+    // We truncate the division result (~/ operator)
+    // as it's enough for our usecase.
     final cellSize = maxWidth / 3;
     final col = (localPosition.dx ~/ cellSize).clamp(0, 2);
     final row = (localPosition.dy ~/ cellSize).clamp(0, 2);
@@ -68,13 +79,15 @@ class _GameBoardState extends State<GameBoard> {
       builder: (context, state) {
         return LayoutBuilder(
           builder: (context, constraints) {
-            final theme = Theme.of(context);
             return AspectRatio(
               aspectRatio: 1,
               child: GestureDetector(
                 onTapUp: loading
                     ? null
                     : (details) async {
+                        if (state.winner != null) {
+                          return;
+                        }
                         toggleLoad();
                         final selectedCell = _handleBoardTap(
                           details.localPosition,
@@ -95,18 +108,8 @@ class _GameBoardState extends State<GameBoard> {
                           toggleLoad();
                         }
                       },
-                child: Container(
-                  decoration: theme.brightness == Brightness.dark
-                      ? null
-                      : BoxDecoration(
-                          color: Colors.white.withValues(
-                            alpha: 0.4,
-                          ),
-                          borderRadius: .circular(20),
-                        ),
-                  child: TicTacToePainter(
-                    board: state.board,
-                  ),
+                child: TicTacToePaintWrapper(
+                  board: state.board,
                 ),
               ),
             );
