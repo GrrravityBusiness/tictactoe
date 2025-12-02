@@ -21,7 +21,7 @@ class ThemeSwitcherWidget extends StatelessWidget {
             currentBrightness == Brightness.light
                 ? Icons.brightness_4
                 : Icons.brightness_7,
-            size: context.dsTokens.icons.medium,
+            size: context.dsTokens.icons.large,
           ),
         );
       },

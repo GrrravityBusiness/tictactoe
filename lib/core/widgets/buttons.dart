@@ -60,7 +60,7 @@ class SimpleTextButton extends StatelessWidget {
               Radius.circular(18),
             ),
           ),
-          minimumSize: const Size(50, 50),
+          minimumSize: const Size(50, 40),
           foregroundColor: isEnabled
               ? theme.colorScheme.secondaryContainer
               : theme.colorScheme.secondaryContainer.withValues(alpha: 0.5),
@@ -70,6 +70,7 @@ class SimpleTextButton extends StatelessWidget {
         );
       case SimpleTextButtonStyle.secondary:
         return TextButton.styleFrom(
+          minimumSize: const Size(50, 40),
           foregroundColor: isEnabled
               ? theme.primaryColor
               : theme.primaryColor.withValues(alpha: 0.5),
@@ -85,6 +86,7 @@ class SimpleTextButton extends StatelessWidget {
         );
       case SimpleTextButtonStyle.danger:
         return TextButton.styleFrom(
+          minimumSize: const Size(50, 40),
           foregroundColor: isEnabled
               ? Colors.white
               : Colors.white.withValues(alpha: 0.5),

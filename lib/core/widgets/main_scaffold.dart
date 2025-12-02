@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tictactoe/core/services/theme/presentation/widget/theme_switcher.dart';
 import 'package:tictactoe/core/widgets/dismiss_keyboard.dart';
 
 class MainScaffold extends StatelessWidget {
@@ -16,10 +15,6 @@ class MainScaffold extends StatelessWidget {
     Theme.of(context);
     return DismissKeyboard(
       child: Scaffold(
-        floatingActionButton: withThemeSwitcher
-            ? const ThemeSwitcherWidget()
-            : null,
-        floatingActionButtonLocation: .miniEndDocked,
         body: body,
       ),
     );

@@ -36,7 +36,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get lobby_field_opponent_label => 'Name';
+  String get lobby_field_opponent_label => 'opponent name';
 
   @override
   String get lobby_select_opponent_title => 'Who are we fighting?';
@@ -93,7 +93,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rule_draw => 'Draw (no winner)';
 
   @override
-  String get lobby_see_rules => 'Check game rules';
+  String get lobby_see_rules => 'Game rules';
 
   @override
   String get lobby_start_game => 'Start !';

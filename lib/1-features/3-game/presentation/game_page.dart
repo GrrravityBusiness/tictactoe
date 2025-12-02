@@ -25,7 +25,6 @@ class GamePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return GameGradientScaffold(
-      withThemeSwitcher: false,
       body: BlocProvider(
         create: (context) => GameController(
           player1: player1,

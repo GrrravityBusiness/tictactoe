@@ -5,7 +5,7 @@ import 'package:tictactoe/1-features/3-game/presentation/cubit/game_state.dart';
 import 'package:tictactoe/core/localization/app_localizations.dart';
 import 'package:tictactoe/core/services/theme/domain/entities/theme_ext.dart';
 import 'package:tictactoe/core/utils/game_utils.dart';
-import 'package:tictactoe/core/widgets/x_o_painters.dart';
+import 'package:tictactoe/core/widgets/painter/x_o_painters.dart';
 
 class PlayerHUD extends StatelessWidget {
   const PlayerHUD({
@@ -61,27 +61,142 @@ class PlayerHUD extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: context.dsTokens.spacing.xlarge),
-                Row(
-                  mainAxisAlignment: .spaceEvenly,
-                  children: [
-                    ...List.generate(
-                      gamer.remainingCounts,
-                      (index) => SizedBox(
-                        width: 60,
-                        height: 60,
-                        child: CustomPaint(
-                          painter: gamer.symbol == XorO.x
-                              ? XPainter(color: theme.colorScheme.primary)
-                              : OPainter(color: Colors.blue),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                _RemainingCountsRow(isMainGamer: isMain),
               ],
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class _RemainingCountsRow extends StatefulWidget {
+  const _RemainingCountsRow({
+    required this.isMainGamer,
+  });
+
+  final bool isMainGamer;
+
+  @override
+  State<_RemainingCountsRow> createState() => _RemainingCountsRowState();
+}
+
+class _RemainingCountsRowState extends State<_RemainingCountsRow> {
+  final List<XorO> _counts = [];
+  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+
+  @override
+  void initState() {
+    final count = widget.isMainGamer
+        ? context.read<GameController>().state.player1.remainingCounts
+        : context.read<GameController>().state.player2.remainingCounts;
+    final symbol = widget.isMainGamer
+        ? context.read<GameController>().state.player1.symbol
+        : context.read<GameController>().state.player2.symbol;
+    _counts.addAll(List.filled(count, symbol));
+    super.initState();
+  }
+
+  void _removeCount() {
+    final removedItem = _counts.last;
+    final index = _counts.length - 1;
+
+    if (_counts.isNotEmpty) {
+      _listKey.currentState?.removeItem(
+        index,
+        (context, animation) => _buildItem(removedItem, index, animation),
+      );
+    }
+    _counts.removeLast();
+  }
+
+  void _reset(int count, XorO symbol) {
+    for (var i = _counts.length - 1; i >= 0; i--) {
+      _listKey.currentState?.removeItem(
+        i,
+        (context, animation) => _buildItem(_counts[i], i, animation),
+        duration: Duration.zero,
+      );
+    }
+    _counts
+      ..clear()
+      ..addAll(List.filled(count, symbol));
+    _listKey.currentState?.insertAllItems(
+      0,
+      count,
+    );
+  }
+
+  Widget _buildItem(XorO item, int index, Animation<double> animation) {
+    return ScaleTransition(
+      scale: animation,
+      child: FadeTransition(
+        opacity: animation,
+        child: SizedBox(
+          width: 60,
+          child: CustomPaint(
+            painter: item == XorO.x
+                ? XPainter(
+                    color: Theme.of(context).colorScheme.primary,
+                    strokeWidth: 4,
+                  )
+                : OPainter(color: Colors.blue, strokeWidth: 5),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<GameController, GameState>(
+          listener: (context, state) => _removeCount(),
+          listenWhen: (previous, current) {
+            final gamer = widget.isMainGamer
+                ? current.player1
+                : current.player2;
+            final previousGamer = widget.isMainGamer
+                ? previous.player1
+                : previous.player2;
+            return gamer.remainingCounts != previousGamer.remainingCounts;
+          },
+        ),
+        BlocListener<GameController, GameState>(
+          listener: (context, state) => _reset(
+            widget.isMainGamer
+                ? state.player1.remainingCounts
+                : state.player2.remainingCounts,
+            widget.isMainGamer ? state.player1.symbol : state.player2.symbol,
+          ),
+          listenWhen: (previous, current) {
+            final gamer = widget.isMainGamer
+                ? current.player1
+                : current.player2;
+            final previousGamer = widget.isMainGamer
+                ? previous.player1
+                : previous.player2;
+            return gamer.symbol != previousGamer.symbol;
+          },
+        ),
+      ],
+      child: SizedBox(
+        height: 60,
+        width: double.maxFinite,
+        child: Center(
+          child: AnimatedList(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            initialItemCount: _counts.length,
+            key: _listKey,
+            itemBuilder: (context, index, animation) {
+              final symbol = _counts[index];
+              return _buildItem(symbol, index, animation);
+            },
+          ),
+        ),
       ),
     );
   }

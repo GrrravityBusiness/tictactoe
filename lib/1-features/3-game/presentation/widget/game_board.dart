@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/1-features/3-game/presentation/cubit/game_cubit.dart';
 import 'package:tictactoe/1-features/3-game/presentation/cubit/game_state.dart';
 import 'package:tictactoe/core/utils/game_utils.dart';
-import 'package:tictactoe/core/widgets/tictactoe_painter.dart';
+import 'package:tictactoe/core/widgets/painter/tictactoe_painter.dart';
 
 class GameBoard extends StatefulWidget {
   const GameBoard({super.key});
@@ -68,13 +68,15 @@ class _GameBoardState extends State<GameBoard> {
       builder: (context, state) {
         return LayoutBuilder(
           builder: (context, constraints) {
-            final theme = Theme.of(context);
             return AspectRatio(
               aspectRatio: 1,
               child: GestureDetector(
                 onTapUp: loading
                     ? null
                     : (details) async {
+                        if (state.winner != null) {
+                          return;
+                        }
                         toggleLoad();
                         final selectedCell = _handleBoardTap(
                           details.localPosition,
@@ -95,18 +97,8 @@ class _GameBoardState extends State<GameBoard> {
                           toggleLoad();
                         }
                       },
-                child: Container(
-                  // decoration: theme.brightness == Brightness.dark
-                  //     ? null
-                  //     : BoxDecoration(
-                  //         color: Colors.white.withValues(
-                  //           alpha: 0.4,
-                  //         ),
-                  //         borderRadius: .circular(20),
-                  //       ),
-                  child: TicTacToePainter(
-                    board: state.board,
-                  ),
+                child: TicTacToePaintWrapper(
+                  board: state.board,
                 ),
               ),
             );

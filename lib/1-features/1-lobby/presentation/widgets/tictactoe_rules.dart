@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tictactoe/core/localization/app_localizations.dart';
 import 'package:tictactoe/core/services/theme/domain/entities/theme_ext.dart';
-import 'package:tictactoe/core/widgets/tictactoe_painter.dart';
+import 'package:tictactoe/core/widgets/painter/tictactoe_painter.dart';
 
 class TicTacToeRulesModal extends StatelessWidget {
   const TicTacToeRulesModal({super.key});
@@ -150,7 +150,7 @@ class _ExampleBoard extends StatelessWidget {
           padding: EdgeInsets.all(
             dsTokens.spacing.large,
           ),
-          child: TicTacToePainter(
+          child: TicTacToePaintWrapper(
             board: board,
             strokeWidth: 4,
           ),
